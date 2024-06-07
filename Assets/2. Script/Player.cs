@@ -179,7 +179,10 @@ public class Player : MonoBehaviourPunCallbacks
         else if(power == "Tagger")
         {
             GameObject tagger = PhotonNetwork.Instantiate(power, transform.position, transform.rotation);
-           
+        }
+        else if(power == "HammerMan")
+        {
+            GameObject hammerMan = PhotonNetwork.Instantiate(power, transform.position, transform.rotation);
         }
 
         PhotonNetwork.Destroy(gameObject);

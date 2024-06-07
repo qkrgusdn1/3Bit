@@ -11594,7 +11594,7 @@ GameObject:
   - component: {fileID: 3164526407283242731}
   m_Layer: 3
   m_Name: LightningMan
-  m_TagString: Tagger
+  m_TagString: Runner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

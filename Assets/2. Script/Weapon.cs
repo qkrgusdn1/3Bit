@@ -8,6 +8,8 @@ public class Weapon : MonoBehaviour
     public float damage;
     public bool canDamage;
 
+    public bool hammer;
+
     public Vector3 size;
     public Transform centerTr;
 
@@ -37,9 +39,11 @@ public class Weapon : MonoBehaviour
             {
                 hittedList.Add(colliders[i].gameObject);
                 Player player = colliders[i].GetComponent<Player>();
+                player.back = true;
                 player.TakeDamage(damage);
             }
         }
+        
     }
 
     private void OnDrawGizmosSelected()

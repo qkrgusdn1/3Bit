@@ -17580,6 +17580,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 50
   canDamage: 0
+  hammer: 0
   size: {x: 0.1, y: 2.25, z: 0.1}
   centerTr: {fileID: 5767611931168340142}
   hitLayerMask:
