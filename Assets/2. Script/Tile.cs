@@ -9,19 +9,31 @@ using UnityEngine.UI;
 public class Tile : MonoBehaviour, IPointerClickHandler
 {
     public TMP_Text numberText;
-    public Board board;
     Vector3 currentPosition;
     public Image image;
+    public int number;
+
+    public Vector2Int index;
+
+    
     private void Start()
     {
         image = GetComponent<Image>();
     }
-    public void Number(string number)
+    public void Number(int number)
     {
-        numberText.text = number;
-        if(number == "16")
+        this.number = number;
+
+        numberText.text = number.ToString();
+        if(number == 0)
         {
-            gameObject.SetActive(false);
+            image.enabled = false;
+            numberText.enabled = false;
+        }
+        else
+        {
+            image.enabled = true;
+            numberText.enabled = true;
         }
     }
 

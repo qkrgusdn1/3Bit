@@ -226,3 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberText: {fileID: 2900753978236303263}
+  board: {fileID: 0}
+  image: {fileID: 8967363684004412036}
+  number: 0
+  index: {x: 0, y: 0}
