@@ -6675,6 +6675,7 @@ MonoBehaviour:
   stunTimer: 0
   maxStunTimer: 5
   back: 0
+  canvas: {fileID: 6721043533209512776}
   skillTimer: 0
   maxSkillTimer: 10
   skillTime: {fileID: 5417564268430801994}

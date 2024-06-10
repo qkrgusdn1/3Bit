@@ -40,15 +40,30 @@ public class Player : MonoBehaviourPunCallbacks
     Coroutine moveBackCoroutine;
     public bool back;
 
+    public GameObject canvas;
+
     public float skillTimer;
     public float maxSkillTimer;
     public Image skillTime;
+
+    public bool startPlayer;
 
     public TMP_Text skillTimerText;
 
     public virtual void Start()
     {
-        
+        if (!photonView.IsMine)
+        {
+            canvas.SetActive(false);
+        }
+        else
+        {
+            if (!startPlayer)
+            {
+                canvas.SetActive(true);
+            }
+
+        }
         animator = GetComponentInChildren<Animator>();
         if (photonView.IsMine)
         {
