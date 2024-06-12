@@ -65,8 +65,8 @@ public class Tagger : Player
             stunTimer -= Time.deltaTime;
             if (stunTimer <= 0)
             {
-                animator.SetTrigger("EndStun");
-                currentSkill = Skill.Default;
+                photonView.RPC("RPCEndSkill", RpcTarget.All, currentSkill);
+
                 stunTimer = maxStunTimer;
                 moveSpeed = maxMoveSpeed;
                 jumpForce = maxJumpForce;
@@ -91,6 +91,15 @@ public class Tagger : Player
             }
         }
 
+    }
+    [PunRPC]
+    public void RPCEndSkill(Skill skill)
+    {
+        if(skill == Skill.Stun)
+        {
+            animator.SetTrigger("EndStun");
+            currentSkill = Skill.Default;
+        }
     }
 
     [PunRPC]
