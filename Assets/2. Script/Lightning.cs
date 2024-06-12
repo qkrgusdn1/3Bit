@@ -22,6 +22,9 @@ public class Lightning : MonoBehaviour
         //    return;
         //}
 
+        if (!player.CompareTag("Tagger"))
+            return;
+
         if (player != null)
         {
             player.TakeDamage(damage);

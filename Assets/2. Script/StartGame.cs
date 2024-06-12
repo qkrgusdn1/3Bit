@@ -17,21 +17,21 @@ public class StartGame : MonoBehaviourPunCallbacks
 
     public List<string> powers = new List<string>();
 
-    //public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
-    //{
-    //    Debug.Log("Player entered room");
-
-    //    if (PhotonNetwork.CurrentRoom.PlayerCount == 2 && PhotonNetwork.IsMasterClient)
-    //    {
-    //        photonView.RPC("RPCCountDown", RpcTarget.All);
-    //        Debug.Log("LogLog");
-    //    }
-    //}
-
-    private void Start()
+    public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
-        photonView.RPC("RPCCountDown", RpcTarget.All);
+        Debug.Log("Player entered room");
+
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 2 && PhotonNetwork.IsMasterClient)
+        {
+            photonView.RPC("RPCCountDown", RpcTarget.All);
+            Debug.Log("LogLog");
+        }
     }
+
+    //private void Start()
+    //{
+    //    photonView.RPC("RPCCountDown", RpcTarget.All);
+    //}
 
 
     IEnumerator CountDown()
@@ -40,7 +40,6 @@ public class StartGame : MonoBehaviourPunCallbacks
         while (true)
         {
             yield return null;
-            photonView.RPC("RPCRandomPowers", RpcTarget.All);
             if (count >= 0)
             {
                 count -= Time.deltaTime;
@@ -51,6 +50,7 @@ public class StartGame : MonoBehaviourPunCallbacks
                 countTxt.gameObject.SetActive(false);
                 if (PhotonNetwork.IsMasterClient)
                 {
+                    RandomPowers();
                     CountingPlayerPowers();
                 }
                 music.gameObject.SetActive(false);
@@ -67,8 +67,7 @@ public class StartGame : MonoBehaviourPunCallbacks
     //    Player[] foundPlayers = FindObjectsOfType<Player>();
     //    players.AddRange(foundPlayers);
     //}
-    [PunRPC]
-    public void RPCRandomPowers()
+    public void RandomPowers()
     {
         for (int i = powers.Count - 1; i > 0; i--)
         {

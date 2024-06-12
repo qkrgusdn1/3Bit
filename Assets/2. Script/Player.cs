@@ -150,9 +150,10 @@ public class Player : MonoBehaviourPunCallbacks
     [PunRPC]
     public void RPCApplySkill(Skill skill)
     {
+        currentSkill = skill;
         if (currentSkill == Skill.Default)
         {
-            currentSkill = skill;
+            
         }
         else if (currentSkill == Skill.Stun)
         {

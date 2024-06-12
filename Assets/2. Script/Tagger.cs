@@ -109,6 +109,7 @@ public class Tagger : Player
 
     public override void ApplySkill(Skill skill)
     {
+        base.ApplySkill(skill);
         currentSkill = skill;
         if (currentSkill == Skill.Default)
         {
@@ -116,6 +117,7 @@ public class Tagger : Player
         }
         else if (currentSkill == Skill.Stun)
         {
+
             animator.Play("Stun");
         }
     }
