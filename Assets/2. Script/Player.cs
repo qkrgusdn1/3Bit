@@ -117,7 +117,8 @@ public class Player : MonoBehaviourPunCallbacks
             photonView.RPC("RpcJump", RpcTarget.All);
         }
         Move();
-        photonView.RPC("RpcDestroy", RpcTarget.All);
+        if (hp <= 0)
+            photonView.RPC("RpcDestroy", RpcTarget.All);
         Rotation();
 
         if (back)
@@ -241,11 +242,8 @@ public class Player : MonoBehaviourPunCallbacks
     [PunRPC]
     public void RpcDestroy()
     {
-        if (hp <= 0)
-        {
-            Destroy(gameObject);
-            Application.Quit();
-        }
+        Destroy(gameObject);
+
     }
 
     //[PunRPC]
