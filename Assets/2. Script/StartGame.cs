@@ -1,8 +1,8 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
-using Photon.Pun;
+using UnityEngine;
 
 public class StartGame : MonoBehaviourPunCallbacks
 {
@@ -10,6 +10,7 @@ public class StartGame : MonoBehaviourPunCallbacks
 
     float count;
     public float maxCount;
+    float currentCount;
 
     public GameObject Barrier;
 
@@ -21,10 +22,15 @@ public class StartGame : MonoBehaviourPunCallbacks
     {
         Debug.Log("Player entered room");
 
-        if (PhotonNetwork.CurrentRoom.PlayerCount == 2 && PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.IsMasterClient)
         {
-            photonView.RPC("RPCCountDown", RpcTarget.All);
-            Debug.Log("LogLog");
+            photonView.RPC("RPCCurrentCount", newPlayer, currentCount);
+
+            if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
+            {
+                photonView.RPC("RPCCountDown", RpcTarget.All);
+                Debug.Log("LogLog");
+            }
         }
     }
 
@@ -36,13 +42,24 @@ public class StartGame : MonoBehaviourPunCallbacks
 
     IEnumerator CountDown()
     {
-        count = maxCount;
+        if (PhotonNetwork.IsMasterClient)
+        {
+            count = maxCount;
+        }
+        else
+        {
+            count = currentCount;
+        }
+
         while (true)
         {
             yield return null;
             if (count >= 0)
             {
                 count -= Time.deltaTime;
+                currentCount = count;
+                photonView.RPC("RPCCurrentCount", RpcTarget.All, currentCount);
+
                 countTxt.text = count.ToString("F0");
             }
             else
@@ -59,6 +76,12 @@ public class StartGame : MonoBehaviourPunCallbacks
             }
         }
 
+    }
+
+    [PunRPC]
+    public void RPCCurrentCount(float value)
+    {
+        currentCount = value;
     }
 
     //private void FindAllPlayers()
