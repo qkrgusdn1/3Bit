@@ -16,7 +16,7 @@ public class Player : MonoBehaviourPunCallbacks
     public Rigidbody rb;
 
     [Header("움직임")]
-    protected float moveSpeed;
+    public float moveSpeed;
     public float maxMoveSpeed;
 
     [Header("점프")]
@@ -200,6 +200,10 @@ public class Player : MonoBehaviourPunCallbacks
         else if(power == "HammerMan")
         {
             GameObject hammerMan = PhotonNetwork.Instantiate(power, transform.position, transform.rotation);
+        }
+        else if (power == "Speeder")
+        {
+            GameObject speeder = PhotonNetwork.Instantiate(power, transform.position, transform.rotation);
         }
 
         PhotonNetwork.Destroy(gameObject);

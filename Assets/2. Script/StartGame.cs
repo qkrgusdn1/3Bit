@@ -1,8 +1,8 @@
-using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using TMPro;
+using Photon.Pun;
 
 public class StartGame : MonoBehaviourPunCallbacks
 {
@@ -10,7 +10,6 @@ public class StartGame : MonoBehaviourPunCallbacks
 
     float count;
     public float maxCount;
-    float currentCount;
 
     public GameObject Barrier;
 
@@ -18,48 +17,32 @@ public class StartGame : MonoBehaviourPunCallbacks
 
     public List<string> powers = new List<string>();
 
-    public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
-    {
-        Debug.Log("Player entered room");
-
-        if (PhotonNetwork.IsMasterClient)
-        {
-            photonView.RPC("RPCCurrentCount", newPlayer, currentCount);
-
-            if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
-            {
-                photonView.RPC("RPCCountDown", RpcTarget.All);
-                Debug.Log("LogLog");
-            }
-        }
-    }
-
-    //private void Start()
+    //public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     //{
-    //    photonView.RPC("RPCCountDown", RpcTarget.All);
+    //    Debug.Log("Player entered room");
+
+    //    if (PhotonNetwork.CurrentRoom.PlayerCount == 2 && PhotonNetwork.IsMasterClient)
+    //    {
+    //        photonView.RPC("RPCCountDown", RpcTarget.All);
+    //        Debug.Log("LogLog");
+    //    }
     //}
+
+    private void Start()
+    {
+        photonView.RPC("RPCCountDown", RpcTarget.All);
+    }
 
 
     IEnumerator CountDown()
     {
-        if (PhotonNetwork.IsMasterClient)
-        {
-            count = maxCount;
-        }
-        else
-        {
-            count = currentCount;
-        }
-
+        count = maxCount;
         while (true)
         {
             yield return null;
             if (count >= 0)
             {
                 count -= Time.deltaTime;
-                currentCount = count;
-                photonView.RPC("RPCCurrentCount", RpcTarget.All, currentCount);
-
                 countTxt.text = count.ToString("F0");
             }
             else
@@ -76,12 +59,6 @@ public class StartGame : MonoBehaviourPunCallbacks
             }
         }
 
-    }
-
-    [PunRPC]
-    public void RPCCurrentCount(float value)
-    {
-        currentCount = value;
     }
 
     //private void FindAllPlayers()

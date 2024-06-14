@@ -44,7 +44,7 @@ public class LightningMan : Player
             {
                 if (col.CompareTag("Tagger"))
                 {
-                    Vector3 spawnPosition = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z); ;
+                    Vector3 spawnPosition = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z); 
                     Quaternion spawnRotation = player.transform.rotation;
                     Lightning lightning = Instantiate(lightningPrefab, spawnPosition, spawnRotation);
                     lightning.SetShooterID(shooterID);
@@ -103,11 +103,6 @@ public class LightningMan : Player
         {
             animator.Play("Stun");
         }
-    }
-
-    public void SetPlayerViewID(int viewID)
-    {
-        photonView.ViewID = viewID;
     }
 
     public void OnDrawGizmosSelected()

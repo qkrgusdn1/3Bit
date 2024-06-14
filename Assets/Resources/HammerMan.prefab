@@ -6679,6 +6679,7 @@ MonoBehaviour:
   skillTimer: 0
   maxSkillTimer: 10
   skillTime: {fileID: 5417564268430801994}
+  startPlayer: 0
   skillTimerText: {fileID: 3921730807556614673}
   weapon: {fileID: 3059334442024921060}
   defaultLayer: 0
@@ -18721,7 +18722,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 50
   canDamage: 0
-  hammer: 0
+  hammer: 1
   size: {x: 0.1, y: -1.65, z: 0.74}
   centerTr: {fileID: 6595388499743663670}
   hitLayerMask:
