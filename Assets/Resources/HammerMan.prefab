@@ -6662,6 +6662,7 @@ MonoBehaviour:
   rotationY: 0
   rotationX: 0
   rb: {fileID: 450110592912097094}
+  moveSpeed: 0
   maxMoveSpeed: 4
   maxJumpForce: 14
   isGrounded: 0

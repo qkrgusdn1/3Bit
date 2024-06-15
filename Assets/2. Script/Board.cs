@@ -36,20 +36,7 @@ public class Board : MonoBehaviour
         NumbersToTiles();
     }
 
-    Tile GetEmptyTile()
-    {
-        for (int i = 0; i < tileArray.GetLength(0); i++)
-        {
-            for (int j = 0; j < tileArray.GetLength(1); j++)
-            {
-                if (!tileArray[i, j].gameObject.activeSelf)
-                {
-                    return tileArray[i, j];
-                }
-            }
-        }
-        return null;
-    }
+   
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.DownArrow))

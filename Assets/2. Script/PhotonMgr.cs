@@ -18,7 +18,6 @@ public class PhotonMgr : MonoBehaviourPunCallbacks
     }
 
     public GameObject lodingPanel;
-    public GameObject roomPanel;
 
     public void TryToJoinServer()
     {
@@ -47,8 +46,7 @@ public class PhotonMgr : MonoBehaviourPunCallbacks
     {
         base.OnJoinedLobby();
         Debug.Log("로비 접속 완료");
-        lodingPanel.SetActive(false);
-        roomPanel.SetActive(true);
+        TryToJoinRoom();
     }
     public override void OnJoinedRoom()
     {
