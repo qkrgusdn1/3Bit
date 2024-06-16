@@ -32,7 +32,9 @@ public class Player : MonoBehaviourPunCallbacks
 
     public float hp;
     public float maxHp;
+    public GameObject hpBarCanvas;
     public Image hpBar;
+    public Image hpBarMine;
 
     public Skill currentSkill;
     public float stunTimer;
@@ -55,9 +57,11 @@ public class Player : MonoBehaviourPunCallbacks
         if (!photonView.IsMine)
         {
             canvas.SetActive(false);
+            hpBarCanvas.SetActive(true);
         }
         else
         {
+            hpBarCanvas.SetActive(false);
             if (!startPlayer)
             {
                 canvas.SetActive(true);
@@ -80,6 +84,7 @@ public class Player : MonoBehaviourPunCallbacks
         jumpForce = maxJumpForce;
         hp = maxHp;
         hpBar.fillAmount = 1;
+        hpBarMine.fillAmount = 1;
     }
 
     public virtual void Update()
@@ -165,6 +170,7 @@ public class Player : MonoBehaviourPunCallbacks
     public void TakeDamage(float damage)
     {
         hp -= damage;
+        hpBarMine.fillAmount = hp / maxHp;
         photonView.RPC("RpcTakeDamage", RpcTarget.All);
     }
 

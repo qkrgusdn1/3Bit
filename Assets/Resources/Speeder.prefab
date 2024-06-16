@@ -2475,7 +2475,7 @@ MonoBehaviour:
   rotationX: 0
   rb: {fileID: 3002497594609249423}
   moveSpeed: 0
-  maxMoveSpeed: 6.3
+  maxMoveSpeed: 6
   maxJumpForce: 17
   isGrounded: 0
   groundLayer:
@@ -2483,7 +2483,9 @@ MonoBehaviour:
     m_Bits: 64
   hp: 0
   maxHp: 100
+  hpBarCanvas: {fileID: 0}
   hpBar: {fileID: 2902803187383222217}
+  hpBarMine: {fileID: 0}
   currentSkill: 0
   stunTimer: 0
   maxStunTimer: 5
