@@ -26,7 +26,7 @@ public class ConnectionCrystal : InteractObject
 
 public enum CrystalMission
 {
-    Puzzle,
-    Puzzle2,
-    Puzzle3
+    Number,
+    BrickOutMission,
+    LinkLine
 }
