@@ -28,12 +28,11 @@ public class PhotonMgr : MonoBehaviourPunCallbacks
 
     public void TryToJoinServer()
     {
-        if (PhotonNetwork.IsConnected)
-            return;
-        lodingPanel.SetActive(true);
+        
         Debug.Log("서버 연결 시도");
         if (!PhotonNetwork.IsConnected)
         {
+            lodingPanel.SetActive(true);
             PhotonNetwork.ConnectUsingSettings();
         }
     }
@@ -56,11 +55,12 @@ public class PhotonMgr : MonoBehaviourPunCallbacks
     {
         base.OnJoinedLobby();
         Debug.Log("로비 접속 완료");
-        TryToJoinRoom();
     }
     public override void OnJoinedRoom()
     {
         base.OnJoinedRoom();
+        Debug.Log("룸에 참가했습니다: " + PhotonNetwork.CurrentRoom.Name);
+        PhotonNetwork.LoadLevel("InGame");
 
     }
     public void TryToJoinRoom()
@@ -95,8 +95,6 @@ public class PhotonMgr : MonoBehaviourPunCallbacks
     {
         Debug.Log("룸 접속 시도");
         PhotonNetwork.JoinRoom(info.Name);
-        PhotonNetwork.LoadLevel("InGame");
-        Debug.Log("Room Name : " + PhotonNetwork.CurrentRoom.Name);
     }
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
