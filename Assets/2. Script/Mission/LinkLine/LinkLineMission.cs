@@ -28,8 +28,8 @@ public class LinkLineMinssion : Mission
         if (Input.GetMouseButtonDown(0))
         {
 
-            Vector2 worldPoint = missionCamera.ScreenToWorldPoint(Input.mousePosition);
-
+            Vector3 worldPoint = missionCamera.ScreenToWorldPoint(Input.mousePosition);
+            worldPoint.z = 0;
             //현재마우스가 클릭한 좌표
             Collider2D col = Physics2D.OverlapPoint(worldPoint, startPointMask);
 
@@ -47,7 +47,8 @@ public class LinkLineMinssion : Mission
         {
             if (startPoint == null)
                 return;
-            Vector2 worldPoint = missionCamera.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 worldPoint = missionCamera.ScreenToWorldPoint(Input.mousePosition);
+            worldPoint.z = 2028;
             startPoint.lineRenderer.positionCount = 2;
             startPoint.lineRenderer.SetPosition(0, startPoint.transform.position);
             startPoint.lineRenderer.SetPosition(1, worldPoint);
@@ -88,7 +89,6 @@ public class LinkLineMinssion : Mission
         }
         Debug.Log("Clear");
         connectionCrystal.gameObject.SetActive(false);
-        gameObject.SetActive(false);
-        CameraMgr.Instance.gameObject.SetActive(true);
+        EndMission();
     }
 }
