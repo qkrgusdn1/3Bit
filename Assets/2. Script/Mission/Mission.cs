@@ -4,17 +4,23 @@ using UnityEngine;
 
 public class Mission : MonoBehaviour
 {
+    public ConnectionCrystal connectionCrystal;
     public CrystalMission crystalMission;
-    public new Camera camera;
+    public Camera missionCamera;
+    
 
     public virtual void StartMission()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         CameraMgr.Instance.gameObject.SetActive(false);
-        camera.gameObject.SetActive(true);
+        gameObject.SetActive(true);
     }
     public virtual void EndMission()
     {
-        camera.gameObject.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        gameObject.SetActive(false);
         CameraMgr.Instance.gameObject.SetActive(true);
     }
 }

@@ -5,15 +5,24 @@ using UnityEngine;
 public class PlayerWall : MonoBehaviour
 {
     public float moveSpeed;
+    Vector3 dir;
+    Rigidbody2D rb;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
     private void Update()
     {
+        Vector3 dir = Vector3.zero;
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.position = new Vector3(transform.position.x - moveSpeed * Time.deltaTime, transform.position.y, transform.position.z);
+            dir += -transform.right * moveSpeed;
         }
         else if(Input.GetKey(KeyCode.RightArrow))
         {
-            transform.position = new Vector3(transform.position.x + moveSpeed * Time.deltaTime, transform.position.y, transform.position.z);
+            dir += transform.right * moveSpeed;
         }
+        rb.velocity = new Vector3(dir.x, rb.velocity.y);
     }
 }

@@ -18,7 +18,7 @@ public class ConnectionCrystal : InteractObject
     {
         if(watched && enterd && Input.GetKeyDown(KeyCode.F))
         {
-            Mission mission = MissionMgr.Instance.GetMission(crystalMission);
+            Mission mission = MissionMgr.Instance.GetMission(crystalMission, this);
             mission.StartMission();
         }
     }
