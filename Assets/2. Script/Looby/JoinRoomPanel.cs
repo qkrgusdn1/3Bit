@@ -7,9 +7,6 @@ public class JoinRoomPanel : MonoBehaviour
 {
     public RoomJoinButton joinRoomJoinButton;
 
-    
-
-
     public RectTransform roomGroupTr;
     public void ListUpRoom(List<RoomInfo> roomList)
     {

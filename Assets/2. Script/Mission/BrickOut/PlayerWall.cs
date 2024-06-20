@@ -14,7 +14,7 @@ public class PlayerWall : MonoBehaviour
     }
     private void Update()
     {
-        Vector3 dir = Vector3.zero;
+        dir = Vector3.zero;
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             dir += -transform.right * moveSpeed;
