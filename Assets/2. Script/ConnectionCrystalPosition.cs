@@ -25,9 +25,9 @@ public class ConnectionCrystalPosition : MonoBehaviourPunCallbacks
             for (int i = crystalPositions.Count - 1; i > 0; i--)
             {
                 int randomIndex = Random.Range(0, i + 1);
-                Transform changePower = crystalPositions[i];
+                Transform change = crystalPositions[i];
                 crystalPositions[i] = crystalPositions[randomIndex];
-                crystalPositions[randomIndex] = changePower;
+                crystalPositions[randomIndex] = change;
             }
 
             for(int i = 0; i < CRYSTAL_SPAWN_COUNT; i++)
