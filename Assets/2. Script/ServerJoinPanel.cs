@@ -7,6 +7,8 @@ using UnityEngine;
 public class ServerJoinPanel : MonoBehaviour
 {
     public TMP_Text loadingText;
+    public string originalText;
+
     void OnEnable()
     {
         StartCoroutine(CoLoadingText());
@@ -16,11 +18,13 @@ public class ServerJoinPanel : MonoBehaviour
     {
         while (true)
         {
-            loadingText.text = "서버 접속 중.";
+            loadingText.text = originalText + ".";
             yield return new WaitForSeconds(0.5f);
-            loadingText.text = "서버 접속 중..";
+
+            loadingText.text = originalText + "..";
             yield return new WaitForSeconds(0.5f);
-            loadingText.text = "서버 접속 중...";
+
+            loadingText.text = originalText + "...";
             yield return new WaitForSeconds(0.5f);
         }
     }

@@ -23,4 +23,13 @@ public class Mission : MonoBehaviour
         gameObject.SetActive(false);
         CameraMgr.Instance.gameObject.SetActive(true);
     }
+
+    public virtual void CheckClear()
+    {
+        Debug.Log("Clear");
+        MissionMgr.Instance.UpMissionCount();
+        MissionMgr.Instance.missionClearText.gameObject.SetActive(true);
+        connectionCrystal.gameObject.SetActive(false);
+        EndMission();
+    }
 }

@@ -78,7 +78,7 @@ public class LinkLineMinssion : Mission
         }
     }
 
-    public void CheckClear()
+    public override void CheckClear()
     {
         for(int i = 0; i < linkStartPoints.Length; i++)
         {
@@ -87,8 +87,6 @@ public class LinkLineMinssion : Mission
                 return;
             }
         }
-        Debug.Log("Clear");
-        connectionCrystal.gameObject.SetActive(false);
-        EndMission();
+        base.CheckClear();
     }
 }

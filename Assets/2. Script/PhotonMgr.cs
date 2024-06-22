@@ -19,8 +19,8 @@ public class PhotonMgr : MonoBehaviourPunCallbacks
         PhotonNetwork.PhotonServerSettings.AppSettings.FixedRegion = "kr";
     }
 
-    public GameObject lodingPanel;
-
+    public GameObject serverLodingPanel;
+    public GameObject roomLodingPanel;
     private void Start()
     {
         TryToJoinServer();
@@ -32,7 +32,7 @@ public class PhotonMgr : MonoBehaviourPunCallbacks
         Debug.Log("서버 연결 시도");
         if (!PhotonNetwork.IsConnected)
         {
-            lodingPanel.SetActive(true);
+            serverLodingPanel.SetActive(true);
             PhotonNetwork.ConnectUsingSettings();
         }
     }
@@ -42,7 +42,7 @@ public class PhotonMgr : MonoBehaviourPunCallbacks
         base.OnConnectedToMaster();
         Debug.Log("PhotonNetwork.CloudRegion : " + PhotonNetwork.CloudRegion);
         Debug.Log("서버 접속 완료");
-        lodingPanel.SetActive(false);
+        serverLodingPanel.SetActive(false);
         
         if (!PhotonNetwork.InLobby)
         {
@@ -77,6 +77,7 @@ public class PhotonMgr : MonoBehaviourPunCallbacks
     //생성하는 함수
     public void CreateRoom(string roomTitle, int maxPlayer)
     {
+        roomLodingPanel.SetActive(true);
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = maxPlayer;
         PhotonNetwork.CreateRoom(roomTitle, roomOptions);
