@@ -17,6 +17,8 @@ public class MissionMgr : MonoBehaviourPunCallbacks
 
     public List<CrystalMission> crystalMissions = new List<CrystalMission>();
 
+    public AudioSource clearSound;
+
     public void Awake()
     {
         Instance = this;

@@ -17,6 +17,8 @@ public class StartGame : MonoBehaviourPunCallbacks
 
     public List<string> powers = new List<string>();
 
+    public ConnectionCrystalPosition connectionCrystalPosition;
+
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
         Debug.Log("Player entered room");
@@ -24,6 +26,7 @@ public class StartGame : MonoBehaviourPunCallbacks
         if (PhotonNetwork.CurrentRoom.PlayerCount == 2 && PhotonNetwork.IsMasterClient)
         {
             photonView.RPC("RPCCountDown", RpcTarget.All);
+            
             Debug.Log("LogLog");
         }
     }
@@ -53,6 +56,7 @@ public class StartGame : MonoBehaviourPunCallbacks
                     RandomPowers();
                     CountingPlayerPowers();
                 }
+                connectionCrystalPosition.StartGame();
                 music.gameObject.SetActive(false);
                 break;
 

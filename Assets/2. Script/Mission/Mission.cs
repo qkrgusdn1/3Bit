@@ -28,6 +28,7 @@ public class Mission : MonoBehaviour
     {
         Debug.Log("Clear");
         MissionMgr.Instance.UpMissionCount();
+        MissionMgr.Instance.clearSound.Play();
         MissionMgr.Instance.missionClearText.gameObject.SetActive(true);
         connectionCrystal.gameObject.SetActive(false);
         EndMission();

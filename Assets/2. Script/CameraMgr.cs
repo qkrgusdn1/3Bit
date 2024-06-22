@@ -8,7 +8,8 @@ public class CameraMgr : MonoBehaviourPunCallbacks
     public static CameraMgr Instance;
     Player playerTargetTr;
 
-    public Transform xRotationTr;
+    public Transform xRotationTr1;
+    public Transform xRotationTr3;
     public void Awake()
     {
         Instance = this;
@@ -29,7 +30,8 @@ public class CameraMgr : MonoBehaviourPunCallbacks
         //transform.forward = targetTr.forward;와 같음 대신 더스무스함
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(playerTargetTr.bodyTr.forward), Time.deltaTime * 5);
 
-        xRotationTr.localEulerAngles = new Vector3(playerTargetTr.rotationX, 0, 0);
+        xRotationTr1.localEulerAngles = new Vector3(playerTargetTr.rotationX, 0, 0);
+        xRotationTr3.localEulerAngles = new Vector3(playerTargetTr.rotationX, 0, 0);
     }
 
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)

@@ -9,6 +9,7 @@ public class BrickBall : MonoBehaviour
     public Vector2 direction;
     public LayerMask wallLayerMask;
     Vector3 position;
+    public int breakBrickCount;
 
     private void Start()
     {
@@ -18,7 +19,6 @@ public class BrickBall : MonoBehaviour
     {
         direction = direction.normalized;
         
-
         RaycastHit2D hit2d = Physics2D.Raycast(transform.position, direction, Time.deltaTime * speed, wallLayerMask);
 
         if (hit2d)
@@ -26,6 +26,7 @@ public class BrickBall : MonoBehaviour
             if (hit2d.collider.CompareTag("Brick"))
             {
                 hit2d.collider.gameObject.SetActive(false);
+                breakBrickCount++;
             }
             else if (hit2d.collider.CompareTag("ResetBall"))
             {

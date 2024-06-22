@@ -15,8 +15,15 @@ public class ConnectionCrystalPosition : MonoBehaviourPunCallbacks
         crystalPositions = GetComponentsInChildren<Transform>().ToList();
         // 첫 번째는 자신의 Transform이므로 제외
         crystalPositions.RemoveAt(0);
+        //테스트 할때만
+        StartGame();
+    }
+
+    public void StartGame()
+    {
         photonView.RPC("RPCStartGame", RpcTarget.All);
     }
+
     [PunRPC]
     public void RPCStartGame()
     {
