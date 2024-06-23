@@ -20,6 +20,7 @@ public class GameMgr : MonoBehaviourPunCallbacks
     }
     public List<Player> players = new List<Player>();
     public Player player;
+    public GameObject diePanel;
     void Start()
     {
         Cursor.visible = false;

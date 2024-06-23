@@ -50,6 +50,8 @@ public class Player : MonoBehaviourPunCallbacks
 
     public bool startPlayer;
 
+    public bool die;
+
     public TMP_Text skillTimerText;
     bool isMoving;
     public virtual void Start()
@@ -101,8 +103,17 @@ public class Player : MonoBehaviourPunCallbacks
             if (!photonView.IsMine)
                 return;
 
+            if (die)
+            {
+                rb.velocity = new Vector3(0, rb.velocity.y, 0);
+                animator.SetBool("IsRunning", false);
+                return;
+            }
+
             if (!canvas.activeSelf && !startPlayer)
             {
+                rb.velocity = new Vector3(0, rb.velocity.y, 0);
+                animator.SetBool("IsRunning", false);
                 return;
             }
 
@@ -132,7 +143,11 @@ public class Player : MonoBehaviourPunCallbacks
         }
         Move();
         if (hp <= 0)
-            photonView.RPC("RpcDestroy", RpcTarget.All);
+        {
+            GameMgr.Instance.diePanel.SetActive(true);
+            photonView.RPC("RpcDIe", RpcTarget.All);
+        }
+            
         Rotation();
 
         if (back)
@@ -247,12 +262,6 @@ public class Player : MonoBehaviourPunCallbacks
     }
     void Move()
     {
-        if (!canvas.activeSelf && !startPlayer)
-        {
-            rb.velocity = new Vector3(0, rb.velocity.y, 0);
-            animator.SetBool("IsRunning", false);
-            return;
-        }
 
         isMoving = false;
         if (Input.GetKey(KeyCode.W))
@@ -288,10 +297,9 @@ public class Player : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    public void RpcDestroy()
+    public void RpcDIe()
     {
         Destroy(gameObject);
-
     }
 
     //[PunRPC]

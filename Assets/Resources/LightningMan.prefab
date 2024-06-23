@@ -11876,6 +11876,7 @@ MonoBehaviour:
   maxSkillTimer: 10
   skillTime: {fileID: 8619351765216144742}
   startPlayer: 0
+  die: 0
   skillTimerText: {fileID: 6058288749692998648}
   lightningPrefab: {fileID: 5695986694790521404, guid: 33e9a7a5d4ed1c44bb99b3191b8c01ba,
     type: 3}

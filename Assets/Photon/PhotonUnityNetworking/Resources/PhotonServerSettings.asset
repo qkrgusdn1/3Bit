@@ -39,31 +39,20 @@ MonoBehaviour:
   - DestroySpaceship
   - Fire
   - RespawnSpaceship
-  - Shoot
-  - RpcShoot
-  - RpcUpdateRotation
-  - RpcRotation
-  - RpcMove
-  - RpcTakeDamage
-  - RpcDestroy
+  - RPCAddPlayerList
+  - RPCApplySkill
+  - RpcAttack
+  - RPCAttack
+  - RPCCountDown
+  - RpcDIe
+  - RPCEndSkill
+  - RpcFinishAttack
   - RpcJump
   - RPCSetPower
-  - RpcAttack
-  - RPCApplySkill
-  - RPCCountDown
-  - RpcFinishAttack
-  - RPCCount
-  - RPCCountingPlayerPowers
-  - RPCRandomPowers
+  - RpcShoot
   - RPCStartGame
-  - RPCRandomNumber
-  - RPCEndSkill
-  - CurrentCount
-  - SetCurrentCount
+  - RpcTakeDamage
   - RPCUpMissionCount
-  - RPCEnteredPlayer
-  - RPCAttack
-  - RPCAddPlayerList
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

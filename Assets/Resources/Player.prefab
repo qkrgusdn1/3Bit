@@ -6243,6 +6243,7 @@ MonoBehaviour:
   maxSkillTimer: 0
   skillTime: {fileID: 3711985663027837184}
   startPlayer: 1
+  die: 0
   skillTimerText: {fileID: 5579506795647832612}
 --- !u!114 &2367898896932892816
 MonoBehaviour:
