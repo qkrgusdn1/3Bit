@@ -71,7 +71,9 @@ public class PhotonMgr : MonoBehaviourPunCallbacks
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
+        Debug.Log("PhotonMgr OnRoomListUpdate");
         this.roomList = roomList;
+
 
     }
     //생성하는 함수

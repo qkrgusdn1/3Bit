@@ -1,3 +1,5 @@
+using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +9,6 @@ public class Mission : MonoBehaviour
     public ConnectionCrystal connectionCrystal;
     public CrystalMission crystalMission;
     public Camera missionCamera;
-    
 
     public virtual void StartMission()
     {
@@ -15,13 +16,17 @@ public class Mission : MonoBehaviour
         Cursor.visible = true;
         CameraMgr.Instance.gameObject.SetActive(false);
         gameObject.SetActive(true);
+        if (GameMgr.Instance.player != null)
+            GameMgr.Instance.player.canvas.SetActive(false);
     }
     public virtual void EndMission()
     {
+        
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         gameObject.SetActive(false);
         CameraMgr.Instance.gameObject.SetActive(true);
+        GameMgr.Instance.player.canvas.SetActive(true);
     }
 
     public virtual void CheckClear()

@@ -6,7 +6,6 @@ using UnityEngine;
 public class ConnectionCrystal : InteractObject
 {
     public CrystalMission crystalMission;
-
     public override void Start()
     {
         base.Start();

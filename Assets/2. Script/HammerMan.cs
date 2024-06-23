@@ -47,6 +47,7 @@ public class HammerMan : Player
     {
         if (!photonView.IsMine)
             return;
+        
 
         if (skillTimer <= maxSkillTimer)
         {

@@ -6,7 +6,7 @@ public class BrickOutMission : Mission
 {
     BrickBall brickBall;
     public List<GameObject> Bricks = new List<GameObject>();
-    private void Start()
+    void Start()
     {
         brickBall = GetComponentInChildren<BrickBall>();
     }

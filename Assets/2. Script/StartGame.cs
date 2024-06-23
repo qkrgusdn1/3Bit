@@ -18,15 +18,20 @@ public class StartGame : MonoBehaviourPunCallbacks
     public List<string> powers = new List<string>();
 
     public ConnectionCrystalPosition connectionCrystalPosition;
-
-    //public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
+    public List<Player> players = new List<Player>();
+    //private void Start()
     //{
-    //    Debug.Log("Player entered room");
+    //    photonView.RPC("RPCEnteredPlayer", RpcTarget.All);
+    //}
 
+
+    //[PunRPC]
+    //public void RPCEnteredPlayer()
+    //{
     //    if (PhotonNetwork.CurrentRoom.PlayerCount == 2 && PhotonNetwork.IsMasterClient)
     //    {
     //        photonView.RPC("RPCCountDown", RpcTarget.All);
-
+    //        PhotonNetwork.CurrentRoom.IsOpen = false;
     //        Debug.Log("LogLog");
     //    }
     //}
@@ -46,6 +51,7 @@ public class StartGame : MonoBehaviourPunCallbacks
             if (count >= 0)
             {
                 count -= Time.deltaTime;
+
                 countTxt.text = count.ToString("F0");
             }
             else

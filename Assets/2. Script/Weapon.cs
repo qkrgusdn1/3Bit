@@ -17,6 +17,13 @@ public class Weapon : MonoBehaviour
 
     List<GameObject> hittedList = new List<GameObject>();
 
+    Player owner;
+
+    private void Start()
+    {
+        owner = GetComponentInParent<Player>();
+    }
+
     public void StartAttack()
     {
         hittedList.Clear();
@@ -38,9 +45,7 @@ public class Weapon : MonoBehaviour
             if (!hittedList.Contains(colliders[i].gameObject))
             {
                 hittedList.Add(colliders[i].gameObject);
-                Player player = colliders[i].GetComponent<Player>();
-                player.back = true;
-                player.TakeDamage(damage);
+                owner.Attack(colliders[i].gameObject.GetComponent<Player>(), damage);
             }
         }
         

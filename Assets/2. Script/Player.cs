@@ -51,7 +51,7 @@ public class Player : MonoBehaviourPunCallbacks
     public bool startPlayer;
 
     public TMP_Text skillTimerText;
-
+    bool isMoving;
     public virtual void Start()
     {
         if (!photonView.IsMine)
@@ -65,6 +65,8 @@ public class Player : MonoBehaviourPunCallbacks
             if (!startPlayer)
             {
                 canvas.SetActive(true);
+                photonView.RPC("RPCAddPlayerList", RpcTarget.All);
+                GameMgr.Instance.AddPlayer();
             }
 
         }
@@ -75,6 +77,7 @@ public class Player : MonoBehaviourPunCallbacks
         }
         skillTimer = maxSkillTimer;
         skillTime.fillAmount = 1;
+        
     }
     public virtual void Awake()
     {
@@ -97,6 +100,12 @@ public class Player : MonoBehaviourPunCallbacks
 
             if (!photonView.IsMine)
                 return;
+
+            if (!canvas.activeSelf && !startPlayer)
+            {
+                return;
+            }
+
         }
 
         if (Physics.Raycast(bodyTr.position, Vector3.down, 0.1f, groundLayer))
@@ -137,6 +146,28 @@ public class Player : MonoBehaviourPunCallbacks
                 StopCoroutine(moveBackCoroutine);
             }
             Move();
+        }
+    }
+
+    public virtual void Attack(Player target, float damage)
+    {
+        if (!photonView.IsMine)
+            return;
+        photonView.RPC("RPCAttack", RpcTarget.All, target.photonView.ViewID);
+    }
+
+    [PunRPC]
+    public void RPCAddPlayerList()
+    {
+        GameMgr.Instance.players.Add(this);
+    }
+
+    [PunRPC]
+    public void RPCAttack(int viewId, float damage)
+    {
+        if(photonView.ViewID == viewId)
+        {
+            TakeDamage(damage);
         }
     }
 
@@ -216,7 +247,14 @@ public class Player : MonoBehaviourPunCallbacks
     }
     void Move()
     {
-        bool isMoving = false;
+        if (!canvas.activeSelf && !startPlayer)
+        {
+            rb.velocity = new Vector3(0, rb.velocity.y, 0);
+            animator.SetBool("IsRunning", false);
+            return;
+        }
+
+        isMoving = false;
         if (Input.GetKey(KeyCode.W))
         {
             dir += bodyTr.forward * moveSpeed;
