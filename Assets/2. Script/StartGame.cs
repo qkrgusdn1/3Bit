@@ -19,22 +19,22 @@ public class StartGame : MonoBehaviourPunCallbacks
 
     public ConnectionCrystalPosition connectionCrystalPosition;
 
-    public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
-    {
-        Debug.Log("Player entered room");
-
-        if (PhotonNetwork.CurrentRoom.PlayerCount == 2 && PhotonNetwork.IsMasterClient)
-        {
-            photonView.RPC("RPCCountDown", RpcTarget.All);
-            
-            Debug.Log("LogLog");
-        }
-    }
-
-    //private void Start()
+    //public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     //{
-    //    photonView.RPC("RPCCountDown", RpcTarget.All);
+    //    Debug.Log("Player entered room");
+
+    //    if (PhotonNetwork.CurrentRoom.PlayerCount == 2 && PhotonNetwork.IsMasterClient)
+    //    {
+    //        photonView.RPC("RPCCountDown", RpcTarget.All);
+
+    //        Debug.Log("LogLog");
+    //    }
     //}
+
+    private void Start()
+    {
+        photonView.RPC("RPCCountDown", RpcTarget.All);
+    }
 
 
     IEnumerator CountDown()

@@ -16,7 +16,7 @@ public class ConnectionCrystalPosition : MonoBehaviourPunCallbacks
         // 첫 번째는 자신의 Transform이므로 제외
         crystalPositions.RemoveAt(0);
         //테스트 할때만
-        StartGame();
+        //StartGame();
     }
 
     public void StartGame()
