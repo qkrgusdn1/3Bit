@@ -7,6 +7,7 @@ using Photon.Realtime;
 public class GameMgr : MonoBehaviourPunCallbacks
 {
     private static GameMgr instance;
+
     public static GameMgr Instance
     {
         get 
@@ -48,6 +49,11 @@ public class GameMgr : MonoBehaviourPunCallbacks
         {
             Debug.Log("MultiGameMgr 현재 방의 접속한 플레이어 수 확인 {PhotonNetwork.PlayerList.Length}");
         }
+    }
+
+    public void OnClickedLobbyBtn()
+    {
+        PhotonNetwork.LoadLevel("SampleScene");
     }
 
 

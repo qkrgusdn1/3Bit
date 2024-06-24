@@ -92,6 +92,7 @@ public class Tagger : Player
         }
 
     }
+
     [PunRPC]
     public void RPCEndSkill(Skill skill)
     {

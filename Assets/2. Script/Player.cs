@@ -142,12 +142,9 @@ public class Player : MonoBehaviourPunCallbacks
             photonView.RPC("RpcJump", RpcTarget.All);
         }
         Move();
-        if (hp <= 0)
-        {
-            GameMgr.Instance.diePanel.SetActive(true);
-            photonView.RPC("RpcDIe", RpcTarget.All);
-        }
-            
+        Die();
+
+
         Rotation();
 
         if (back)
@@ -163,6 +160,47 @@ public class Player : MonoBehaviourPunCallbacks
             Move();
         }
     }
+
+    public virtual void Die()
+    {
+        if (hp <= 0)
+        {
+            GameMgr.Instance.diePanel.SetActive(true);
+            GameMgr.Instance.players.Remove(this);
+
+            
+
+            if (GameMgr.Instance.players.Count == 1)
+            {
+                if (GameMgr.Instance.players[0].gameObject.CompareTag("Runner"))
+                {
+                    ClearMgr.Instance.win = true;
+                }
+                else
+                {
+                    ClearMgr.Instance.win = false;
+                }
+                photonView.RPC("RPCMoveClearScenes", RpcTarget.All);
+            }
+
+            if (gameObject.CompareTag("Runner"))
+            {
+                GameMgr.Instance.diePanel.SetActive(true);
+            }
+            else if (gameObject.CompareTag("Tagger"))
+            {
+                ClearMgr.Instance.win = true;
+                photonView.RPC("RPCMoveClearScenes", RpcTarget.All);
+            }
+            photonView.RPC("RpcDIe", RpcTarget.All);
+        }
+    }
+    [PunRPC]
+    public void RPCMoveClearScenes()
+    {
+        PhotonNetwork.LoadLevel("ClearScenes");
+    }
+
 
     public virtual void Attack(Player target, float damage)
     {
