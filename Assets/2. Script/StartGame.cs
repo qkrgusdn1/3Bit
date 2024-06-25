@@ -28,7 +28,7 @@ public class StartGame : MonoBehaviourPunCallbacks
     [PunRPC]
     public void RPCEnteredPlayer()
     {
-        if (PhotonNetwork.CurrentRoom.PlayerCount == 4 && PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 2 && PhotonNetwork.IsMasterClient)
         {
             photonView.RPC("RPCCountDown", RpcTarget.All);
             PhotonNetwork.CurrentRoom.IsOpen = false;
@@ -61,8 +61,9 @@ public class StartGame : MonoBehaviourPunCallbacks
                 {
                     RandomPowers();
                     CountingPlayerPowers();
+                    connectionCrystalPosition.StartGame();
                 }
-                connectionCrystalPosition.StartGame();
+                
                 music.gameObject.SetActive(false);
                 break;
 

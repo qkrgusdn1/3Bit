@@ -68,18 +68,4 @@ public class Speeder : Player
         SpeedUpRunner speedUpRunner = Instantiate(speedUpRunnerPrefab, currentPosition, currentRotation);
         speedUpRunner.SetShooterID(shooterID);
     }
-    public override void ApplySkill(Skill skill)
-    {
-        base.ApplySkill(skill);
-        currentSkill = skill;
-        if (currentSkill == Skill.Default)
-        {
-
-        }
-        else if (currentSkill == Skill.Stun)
-        {
-
-            animator.Play("Stun");
-        }
-    }
 }

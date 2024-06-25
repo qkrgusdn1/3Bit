@@ -141,7 +141,6 @@ public class Player : MonoBehaviourPunCallbacks
             isJumping = true;
             photonView.RPC("RpcJump", RpcTarget.All);
         }
-        Move();
         Die();
 
 
@@ -178,14 +177,8 @@ public class Player : MonoBehaviourPunCallbacks
                 {
                     ClearMgr.Instance.win = false;
                 }
-                photonView.RPC("RPCMoveClearScenes", RpcTarget.All);
-            }
-
-
-
-            if (gameObject.CompareTag("Runner"))
-            {
-                GameMgr.Instance.diePanel.SetActive(true);
+                GameMgr.Instance.MoveClearScenes();
+                return;
             }
             else if (gameObject.CompareTag("Tagger"))
             {
@@ -202,7 +195,7 @@ public class Player : MonoBehaviourPunCallbacks
     {
         if (!photonView.IsMine)
             return;
-        photonView.RPC("RPCAttack", RpcTarget.All, target.photonView.ViewID);
+        photonView.RPC("RPCAttack", RpcTarget.All, target.photonView.ViewID, damage);
     }
 
     [PunRPC]
@@ -225,6 +218,7 @@ public class Player : MonoBehaviourPunCallbacks
         transform.Translate(-transform.forward * moveSpeed * Time.deltaTime);
         yield return new WaitForSeconds(2f);
         back = false;
+        currentSkill = Skill.Default;
     }
 
     public virtual void ApplySkill(Skill skill)
@@ -244,6 +238,9 @@ public class Player : MonoBehaviourPunCallbacks
         else if (currentSkill == Skill.Stun)
         {
             animator.Play("Stun");
+        }else if(currentSkill == Skill.Back)
+        {
+            back = true;
         }
     }
 
@@ -381,4 +378,5 @@ public enum Skill
 {
     Default,
     Stun,
+    Back
 }

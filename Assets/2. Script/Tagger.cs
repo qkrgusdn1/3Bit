@@ -138,6 +138,10 @@ public class Tagger : Player
 
             animator.Play("Stun");
         }
+        else if (currentSkill == Skill.Back)
+        {
+            back = true;
+        }
     }
 
 

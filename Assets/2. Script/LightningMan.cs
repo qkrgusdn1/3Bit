@@ -92,18 +92,7 @@ public class LightningMan : Player
 
     }
 
-    public override void ApplySkill(Skill skill)
-    {
-        currentSkill = skill;
-        if (currentSkill == Skill.Default)
-        {
 
-        }
-        else if (currentSkill == Skill.Stun)
-        {
-            animator.Play("Stun");
-        }
-    }
 
     public void OnDrawGizmosSelected()
     {

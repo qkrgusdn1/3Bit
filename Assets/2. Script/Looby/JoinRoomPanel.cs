@@ -10,6 +10,8 @@ public class JoinRoomPanel : MonoBehaviourPunCallbacks
 
     public RectTransform roomGroupTr;
 
+    public List<RoomJoinButton> buttons = new List<RoomJoinButton>();
+
     public override void OnEnable()
     {
         base.OnEnable();
@@ -20,9 +22,28 @@ public class JoinRoomPanel : MonoBehaviourPunCallbacks
     }
     public void ListUpRoom(List<RoomInfo> roomList)
     {
-        for(int i = 0; i < roomList.Count; i++)
+        for (int i = 0; i < buttons.Count; i++)
         {
-            RoomJoinButton button = Instantiate(joinRoomJoinButton, roomGroupTr);
+            buttons[i].gameObject.SetActive(false);
+        }
+        for (int i = 0; i < roomList.Count; i++)
+        {
+            RoomJoinButton button = null;
+
+            for (int j = 0; j < buttons.Count; j++)
+            {
+                if (!buttons[j].gameObject.activeSelf)
+                {
+                    buttons[j].gameObject.SetActive(true);
+                    button = buttons[j];
+                    break;
+                }
+            }
+            if(button == null)
+            {
+                button = Instantiate(joinRoomJoinButton, roomGroupTr);
+                buttons.Add(button);
+            }
             button.SetRoom(roomList[i]);
         }
     }

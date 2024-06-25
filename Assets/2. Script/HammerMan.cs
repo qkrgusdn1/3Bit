@@ -93,7 +93,14 @@ public class HammerMan : Player
         }
 
     }
-
+    public override void Attack(Player target, float damage)
+    {
+        base.Attack(target, damage);
+        if (target.CompareTag("Tagger"))
+        {
+            target.currentSkill = Skill.Back;
+        }
+    }
     [PunRPC]
     public void RpcAttack()
     {
@@ -107,16 +114,5 @@ public class HammerMan : Player
         animator.SetLayerWeight(upperLayer, 0);
     }
 
-    public override void ApplySkill(Skill skill)
-    {
-        currentSkill = skill;
-        if (currentSkill == Skill.Default)
-        {
 
-        }
-        else if (currentSkill == Skill.Stun)
-        {
-            animator.Play("Stun");
-        }
-    }
 }
