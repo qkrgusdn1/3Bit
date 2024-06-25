@@ -21,5 +21,10 @@ public class WinList : MonoBehaviour
         }
     }
 
+    public void OnClickedLobbyBtn()
+    {
+        ClearMgr.Instance.OnClickedLobbyBtn();
+    }
+
 
 }

@@ -22,6 +22,7 @@ public class GameMgr : MonoBehaviourPunCallbacks
     public List<Player> players = new List<Player>();
     public Player player;
     public GameObject diePanel;
+    public GameObject connection;
     void Start()
     {
         Cursor.visible = false;
@@ -29,7 +30,16 @@ public class GameMgr : MonoBehaviourPunCallbacks
         PhotonNetwork.Instantiate("Player", new Vector3(0, 0, 0), Quaternion.identity);
         
     }
+    public void MoveClearScenes()
+    {
+        photonView.RPC("RPCMoveClearScenes", RpcTarget.All);
+    }
 
+    [PunRPC]
+    public void RPCMoveClearScenes()
+    {
+        PhotonNetwork.LoadLevel("ClearScenes");
+    }
     public void AddPlayer()
     {
         for (int i = 0; i < players.Count; i++)

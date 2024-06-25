@@ -24,9 +24,14 @@ public class Mission : MonoBehaviour
         
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        gameObject.SetActive(false);
         CameraMgr.Instance.gameObject.SetActive(true);
         GameMgr.Instance.player.canvas.SetActive(true);
+        if (MissionMgr.Instance.missionCountBar.fillAmount >= 1)
+        {
+            GameMgr.Instance.connection.gameObject.SetActive(false);
+        }
+
+        gameObject.SetActive(false);
     }
 
     public virtual void CheckClear()

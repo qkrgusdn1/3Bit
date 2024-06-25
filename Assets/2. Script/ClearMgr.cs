@@ -18,5 +18,8 @@ public class ClearMgr : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-
+    public void OnClickedLobbyBtn()
+    {
+        PhotonNetwork.LoadLevel("SampleScene");
+    }
 }

@@ -93,6 +93,14 @@ public class Tagger : Player
 
     }
 
+    public override void TakeDamage(float damage)
+    {
+        if (MissionMgr.Instance.missionCountBar.fillAmount >= 1)
+        {
+            base.TakeDamage(damage);
+        }
+    }
+
     [PunRPC]
     public void RPCEndSkill(Skill skill)
     {

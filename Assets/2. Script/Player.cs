@@ -161,14 +161,12 @@ public class Player : MonoBehaviourPunCallbacks
         }
     }
 
-    public virtual void Die()
+    public void Die()
     {
         if (hp <= 0)
         {
             GameMgr.Instance.diePanel.SetActive(true);
             GameMgr.Instance.players.Remove(this);
-
-            
 
             if (GameMgr.Instance.players.Count == 1)
             {
@@ -176,12 +174,14 @@ public class Player : MonoBehaviourPunCallbacks
                 {
                     ClearMgr.Instance.win = true;
                 }
-                else
+                else if(GameMgr.Instance.players[0].gameObject.CompareTag("Tagger"))
                 {
                     ClearMgr.Instance.win = false;
                 }
                 photonView.RPC("RPCMoveClearScenes", RpcTarget.All);
             }
+
+
 
             if (gameObject.CompareTag("Runner"))
             {
@@ -190,16 +190,12 @@ public class Player : MonoBehaviourPunCallbacks
             else if (gameObject.CompareTag("Tagger"))
             {
                 ClearMgr.Instance.win = true;
-                photonView.RPC("RPCMoveClearScenes", RpcTarget.All);
+                GameMgr.Instance.MoveClearScenes();
             }
             photonView.RPC("RpcDIe", RpcTarget.All);
         }
     }
-    [PunRPC]
-    public void RPCMoveClearScenes()
-    {
-        PhotonNetwork.LoadLevel("ClearScenes");
-    }
+    
 
 
     public virtual void Attack(Player target, float damage)
@@ -251,7 +247,7 @@ public class Player : MonoBehaviourPunCallbacks
         }
     }
 
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
         hp -= damage;
         hpBarMine.fillAmount = hp / maxHp;
