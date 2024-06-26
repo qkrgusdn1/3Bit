@@ -96,9 +96,10 @@ public class HammerMan : Player
     public override void Attack(Player target, float damage)
     {
         base.Attack(target, damage);
+        Debug.Log("HammerMan Attack1");
         if (target.CompareTag("Tagger"))
         {
-            Debug.Log("HammerMan Attack");
+            Debug.Log("HammerMan Attack2");
             target.ApplySkill(Skill.Back);
         }
     }
