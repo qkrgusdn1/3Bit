@@ -42,19 +42,18 @@ MonoBehaviour:
   - RPCAddPlayerList
   - RPCApplySkill
   - RpcAttack
-  - RPCAttack
   - RPCCountDown
   - RpcDIe
   - RPCEndSkill
+  - RPCEnteredPlayer
   - RpcFinishAttack
   - RpcJump
+  - RPCMoveClearScenes
   - RPCSetPower
   - RpcShoot
-  - RPCStartGame
   - RpcTakeDamage
   - RPCUpMissionCount
-  - RPCMoveClearScenes
-  - RPCEnteredPlayer
+  - RPCTakeDamage
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

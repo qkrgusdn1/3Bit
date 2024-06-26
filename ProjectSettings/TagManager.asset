@@ -4,11 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Tagger
   - Runner
   - Brick
   - ResetBall
   - NumberBtn
+  - Tagger
   layers:
   - Default
   - TransparentFX
