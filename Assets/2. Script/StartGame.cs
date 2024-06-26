@@ -7,6 +7,10 @@ using Photon.Pun;
 public class StartGame : MonoBehaviourPunCallbacks
 {
     public TMP_Text countTxt;
+    public TMP_Text gameTimerText;
+
+    public int minutes;
+    public int seconds;
 
     float count;
     public float maxCount;
@@ -57,19 +61,38 @@ public class StartGame : MonoBehaviourPunCallbacks
             else
             {
                 countTxt.gameObject.SetActive(false);
+                gameTimerText.gameObject.SetActive(true);
                 if (PhotonNetwork.IsMasterClient)
                 {
                     RandomPowers();
                     CountingPlayerPowers();
                     connectionCrystalPosition.StartGame();
                 }
-                
+                StartCoroutine(CoTimer());
                 music.gameObject.SetActive(false);
                 break;
 
             }
         }
 
+    }
+
+    IEnumerator CoTimer()
+    {
+        while(minutes == 0 && seconds == 0)
+        {
+            seconds--;
+            if(seconds == 0)
+            {
+                minutes--;
+                seconds = 59;
+            }
+            gameTimerText.text = minutes.ToString() + ":" + seconds.ToString();
+            yield return new WaitForSeconds(1);
+        }
+        ClearMgr.Instance.win = false;
+        if (PhotonNetwork.IsMasterClient)
+            GameMgr.Instance.MoveClearScenes();
     }
 
     //private void FindAllPlayers()

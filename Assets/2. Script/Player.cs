@@ -146,11 +146,7 @@ public class Player : MonoBehaviourPunCallbacks
 
         Rotation();
 
-        if (back)
-        {
-            moveBackCoroutine = StartCoroutine(MoveBackCoroutine());
-        }
-        else
+        if (!back)
         {
             if (moveBackCoroutine != null)
             {
@@ -249,6 +245,10 @@ public class Player : MonoBehaviourPunCallbacks
         hp -= damage;
         hpBarMine.fillAmount = hp / maxHp;
         photonView.RPC("RpcTakeDamage", RpcTarget.All);
+        if (back)
+        {
+            moveBackCoroutine = StartCoroutine(MoveBackCoroutine());
+        }
     }
 
     public void Rotation()
