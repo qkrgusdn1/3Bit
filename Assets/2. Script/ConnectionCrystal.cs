@@ -15,6 +15,8 @@ public class ConnectionCrystal : InteractObject
 
     private void Update()
     {
+        if (GameMgr.Instance.player == null)
+            return;
         if (!GameMgr.Instance.player.gameObject.CompareTag("Tagger"))
         {
             if (watched && enterd && Input.GetKeyDown(KeyCode.F))

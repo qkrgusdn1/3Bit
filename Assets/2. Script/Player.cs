@@ -146,12 +146,8 @@ public class Player : MonoBehaviourPunCallbacks
 
         Rotation();
 
-        if (!back)
+        if (currentSkill == Skill.Default)
         {
-            if (moveBackCoroutine != null)
-            {
-                StopCoroutine(moveBackCoroutine);
-            }
             Move();
         }
     }
@@ -191,23 +187,13 @@ public class Player : MonoBehaviourPunCallbacks
     {
         if (!photonView.IsMine)
             return;
-        photonView.RPC("RPCAttack", RpcTarget.All, target.photonView.ViewID, damage);
+        target.TakeDamage(damage);
     }
 
     [PunRPC]
     public void RPCAddPlayerList()
     {
         GameMgr.Instance.players.Add(this);
-    }
-
-    [PunRPC]
-    public void RPCAttack(int viewId, float damage)
-    {
-        Debug.Log("Attack");
-        if(photonView.ViewID == viewId)
-        {
-            TakeDamage(damage);
-        }
     }
 
     IEnumerator MoveBackCoroutine()
@@ -236,21 +222,18 @@ public class Player : MonoBehaviourPunCallbacks
             animator.Play("Stun");
         }else if(currentSkill == Skill.Back)
         {
-            back = true;
+            moveBackCoroutine = StartCoroutine(MoveBackCoroutine());
         }
     }
 
     public virtual void TakeDamage(float damage)
     {
         Debug.Log("ss");
-        hp -= damage;
+        
+        photonView.RPC("RPCTakeDamage", RpcTarget.All, damage);
+        //if(photonView.IsMine)
+        //    photonView.RPC("RpcTakeDamage", RpcTarget.All);
 
-        if(photonView.IsMine)
-            photonView.RPC("RpcTakeDamage", RpcTarget.All);
-        if (back)
-        {
-            moveBackCoroutine = StartCoroutine(MoveBackCoroutine());
-        }
     }
 
     public void Rotation()
@@ -355,9 +338,15 @@ public class Player : MonoBehaviourPunCallbacks
     
 
     [PunRPC]
-    public void RpcTakeDamage()
+    public void RPCTakeDamage(float damage)
     {
+        hp -= damage;
         hpBar.fillAmount = hp / maxHp;
+        if (photonView.IsMine)
+        {
+            hpBarMine.fillAmount = hp / maxHp;
+        }
+
     }
 
     public virtual void Shoot()

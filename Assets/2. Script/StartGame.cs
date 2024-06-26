@@ -23,27 +23,27 @@ public class StartGame : MonoBehaviourPunCallbacks
 
     public ConnectionCrystalPosition connectionCrystalPosition;
     public List<Player> players = new List<Player>();
-    //private void Start()
-    //{
-    //    photonView.RPC("RPCEnteredPlayer", RpcTarget.All);
-    //}
-
-
-    //[PunRPC]
-    //public void RPCEnteredPlayer()
-    //{
-    //    if (PhotonNetwork.CurrentRoom.PlayerCount == 2 && PhotonNetwork.IsMasterClient)
-    //    {
-    //        photonView.RPC("RPCCountDown", RpcTarget.All);
-    //        PhotonNetwork.CurrentRoom.IsOpen = false;
-    //        Debug.Log("LogLog");
-    //    }
-    //}
-
     private void Start()
     {
-        photonView.RPC("RPCCountDown", RpcTarget.All);
+        photonView.RPC("RPCEnteredPlayer", RpcTarget.All);
     }
+
+
+    [PunRPC]
+    public void RPCEnteredPlayer()
+    {
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 2 && PhotonNetwork.IsMasterClient)
+        {
+            photonView.RPC("RPCCountDown", RpcTarget.All);
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+            Debug.Log("LogLog");
+        }
+    }
+
+    //private void Start()
+    //{
+    //    photonView.RPC("RPCCountDown", RpcTarget.All);
+    //}
 
 
     IEnumerator CountDown()

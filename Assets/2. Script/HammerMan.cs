@@ -98,6 +98,7 @@ public class HammerMan : Player
         base.Attack(target, damage);
         if (target.CompareTag("Tagger"))
         {
+            Debug.Log("HammerMan Attack");
             target.ApplySkill(Skill.Back);
         }
     }
