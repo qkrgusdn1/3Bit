@@ -15,10 +15,13 @@ public class ConnectionCrystal : InteractObject
 
     private void Update()
     {
-        if(watched && enterd && Input.GetKeyDown(KeyCode.F))
+        if (!GameMgr.Instance.player.gameObject.CompareTag("Tagger"))
         {
-            Mission mission = MissionMgr.Instance.GetMission(crystalMission, this);
-            mission.StartMission();
+            if (watched && enterd && Input.GetKeyDown(KeyCode.F))
+            {
+                Mission mission = MissionMgr.Instance.GetMission(crystalMission, this);
+                mission.StartMission();
+            }
         }
     }
 } 

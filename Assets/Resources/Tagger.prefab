@@ -2369,7 +2369,7 @@ GameObject:
   - component: {fileID: 6212405674657917089}
   - component: {fileID: 5593380341107259734}
   - component: {fileID: 635073418805309951}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tagger
   m_TagString: Tagger
   m_Icon: {fileID: 0}

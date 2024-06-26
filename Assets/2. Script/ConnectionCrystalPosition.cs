@@ -31,7 +31,9 @@ public class ConnectionCrystalPosition : MonoBehaviourPunCallbacks
 
         for (int i = 0; i < CRYSTAL_SPAWN_COUNT; i++)
         {
-            PhotonNetwork.Instantiate("ConnectionCrystal", crystalPositions[i].transform.position, Quaternion.identity);
+            Quaternion rotation = Quaternion.Euler(-90f, 0f, 0f);
+            GameObject crystal = PhotonNetwork.Instantiate("ConnectionCrystal", crystalPositions[i].position, rotation);
+            crystal.transform.SetParent(crystalPositions[i], true);
         }
     }
 

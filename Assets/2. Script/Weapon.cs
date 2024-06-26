@@ -46,6 +46,10 @@ public class Weapon : MonoBehaviour
             {
                 hittedList.Add(colliders[i].gameObject);
                 owner.Attack(colliders[i].gameObject.GetComponent<Player>(), damage);
+                if (hammer)
+                {
+                    colliders[i].gameObject.GetComponent<Player>().currentSkill = Skill.Back;
+                }
             }
         }
         
