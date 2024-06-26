@@ -79,16 +79,19 @@ public class StartGame : MonoBehaviourPunCallbacks
 
     IEnumerator CoTimer()
     {
-        while(minutes == 0 && seconds == 0)
+        while(true)
         {
+            if (minutes <= 0 && seconds <= 0)
+                break;
             seconds--;
-            if(seconds == 0)
+            if(seconds <= 0)
             {
                 minutes--;
                 seconds = 59;
             }
             gameTimerText.text = minutes.ToString() + ":" + seconds.ToString();
             yield return new WaitForSeconds(1);
+            
         }
         ClearMgr.Instance.win = false;
         if (PhotonNetwork.IsMasterClient)

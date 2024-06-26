@@ -203,6 +203,7 @@ public class Player : MonoBehaviourPunCallbacks
     [PunRPC]
     public void RPCAttack(int viewId, float damage)
     {
+        Debug.Log("Attack");
         if(photonView.ViewID == viewId)
         {
             TakeDamage(damage);
@@ -219,8 +220,7 @@ public class Player : MonoBehaviourPunCallbacks
 
     public virtual void ApplySkill(Skill skill)
     {
-        if(photonView.IsMine)
-            photonView.RPC("RPCApplySkill", RpcTarget.All, skill);
+        photonView.RPC("RPCApplySkill", RpcTarget.All, skill);
     }
 
     [PunRPC]
@@ -242,9 +242,11 @@ public class Player : MonoBehaviourPunCallbacks
 
     public virtual void TakeDamage(float damage)
     {
+        Debug.Log("ss");
         hp -= damage;
-        hpBarMine.fillAmount = hp / maxHp;
-        photonView.RPC("RpcTakeDamage", RpcTarget.All);
+
+        if(photonView.IsMine)
+            photonView.RPC("RpcTakeDamage", RpcTarget.All);
         if (back)
         {
             moveBackCoroutine = StartCoroutine(MoveBackCoroutine());

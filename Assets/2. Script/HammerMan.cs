@@ -98,7 +98,7 @@ public class HammerMan : Player
         base.Attack(target, damage);
         if (target.CompareTag("Tagger"))
         {
-            target.currentSkill = Skill.Back;
+            target.ApplySkill(Skill.Back);
         }
     }
     [PunRPC]

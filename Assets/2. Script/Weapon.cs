@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -8,7 +9,6 @@ public class Weapon : MonoBehaviour
     public float damage;
     public bool canDamage;
 
-    public bool hammer;
 
     public Vector3 size;
     public Transform centerTr;
@@ -46,10 +46,6 @@ public class Weapon : MonoBehaviour
             {
                 hittedList.Add(colliders[i].gameObject);
                 owner.Attack(colliders[i].gameObject.GetComponent<Player>(), damage);
-                if (hammer)
-                {
-                    colliders[i].gameObject.GetComponent<Player>().currentSkill = Skill.Back;
-                }
             }
         }
         

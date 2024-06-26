@@ -124,25 +124,4 @@ public class Tagger : Player
     {
         animator.SetLayerWeight(upperLayer, 0);
     }
-
-    public override void ApplySkill(Skill skill)
-    {
-        base.ApplySkill(skill);
-        currentSkill = skill;
-        if (currentSkill == Skill.Default)
-        {
-
-        }
-        else if (currentSkill == Skill.Stun)
-        {
-
-            animator.Play("Stun");
-        }
-        else if (currentSkill == Skill.Back)
-        {
-            back = true;
-        }
-    }
-
-
 }
