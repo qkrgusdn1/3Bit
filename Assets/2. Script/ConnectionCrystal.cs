@@ -6,6 +6,9 @@ using UnityEngine;
 public class ConnectionCrystal : InteractObject
 {
     public CrystalMission crystalMission;
+
+    public float taggerRange;
+
     public override void Start()
     {
         base.Start();

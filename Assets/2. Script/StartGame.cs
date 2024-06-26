@@ -84,7 +84,7 @@ public class StartGame : MonoBehaviourPunCallbacks
             if (minutes <= 0 && seconds <= 0)
                 break;
             seconds--;
-            if(seconds <= 0)
+            if(seconds < 0)
             {
                 minutes--;
                 seconds = 59;

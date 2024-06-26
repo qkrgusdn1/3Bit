@@ -33,8 +33,17 @@ public class ConnectionCrystalPosition : MonoBehaviourPunCallbacks
         {
             Quaternion rotation = Quaternion.Euler(-90f, 0f, 0f);
             GameObject crystal = PhotonNetwork.Instantiate("ConnectionCrystal", crystalPositions[i].position, rotation);
-            crystal.transform.SetParent(crystalPositions[i], true);
+            int crystalViewID = crystal.GetComponent<PhotonView>().ViewID;
+            int crystalPositionViewID = crystalPositions[i].GetComponent<PhotonView>().ViewID;
+            photonView.RPC("RPCCrystalPositions", RpcTarget.All, crystalViewID, crystalPositionViewID);
         }
+    }
+    [PunRPC]
+    void RPCCrystalPositions(int crystalViewID, int crystalPositionViewID)
+    {
+        GameObject crystal = PhotonView.Find(crystalViewID).gameObject;
+        Transform crystalPosition = PhotonView.Find(crystalPositionViewID).transform;
+        crystal.transform.SetParent(crystalPosition);
     }
 
 }

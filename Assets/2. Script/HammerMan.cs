@@ -28,18 +28,19 @@ public class HammerMan : Player
 
     public void StartAttack()
     {
+        Debug.Log("HammerMan StartAttack");
         weapon.StartAttack();
     }
 
     public void EndAttack()
     {
-        Debug.Log("Tagger EndAttack");
+        Debug.Log("HammerMan EndAttack");
         weapon.EndAttack();
     }
 
     public void FinishAttack()
     {
-        Debug.Log("Tagger FinishAttack");
+        Debug.Log("HammerMan FinishAttack");
         photonView.RPC("RpcFinishAttack", RpcTarget.All);
     }
 
