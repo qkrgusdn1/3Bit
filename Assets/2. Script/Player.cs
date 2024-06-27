@@ -36,6 +36,8 @@ public class Player : MonoBehaviourPunCallbacks
     public Image hpBar;
     public Image hpBarMine;
 
+    public Image hpBarBgMine;
+
     public Skill currentSkill;
     public float stunTimer;
     public float maxStunTimer;
@@ -43,6 +45,7 @@ public class Player : MonoBehaviourPunCallbacks
     public bool back;
 
     public GameObject canvas;
+    public GameObject allSkillTime;
 
     public float skillTimer;
     public float maxSkillTimer;
@@ -156,6 +159,8 @@ public class Player : MonoBehaviourPunCallbacks
     {
         if (hp <= 0)
         {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             GameMgr.Instance.diePanel.SetActive(true);
             GameMgr.Instance.players.Remove(this);
 
@@ -172,7 +177,8 @@ public class Player : MonoBehaviourPunCallbacks
                 GameMgr.Instance.MoveClearScenes();
                 return;
             }
-            else if (gameObject.CompareTag("Tagger"))
+
+            if (gameObject.CompareTag("Tagger"))
             {
                 ClearMgr.Instance.win = true;
                 GameMgr.Instance.MoveClearScenes();
@@ -202,11 +208,6 @@ public class Player : MonoBehaviourPunCallbacks
         yield return new WaitForSeconds(2f);
         back = false;
         currentSkill = Skill.Default;
-    }
-
-    public virtual void ApplySkill(Skill skill)
-    {
-        photonView.RPC("RPCApplySkill", RpcTarget.All, skill);
     }
 
     [PunRPC]

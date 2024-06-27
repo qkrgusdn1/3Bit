@@ -6234,11 +6234,13 @@ MonoBehaviour:
   hpBarCanvas: {fileID: 1395096268582875477}
   hpBar: {fileID: 3880860775672737749}
   hpBarMine: {fileID: 9214095080087833126}
+  hpBarBgMine: {fileID: 0}
   currentSkill: 0
   stunTimer: 5
   maxStunTimer: 5
   back: 0
   canvas: {fileID: 6475313556774354822}
+  allSkillTime: {fileID: 0}
   skillTimer: 0
   maxSkillTimer: 0
   skillTime: {fileID: 3711985663027837184}

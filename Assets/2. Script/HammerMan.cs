@@ -62,25 +62,7 @@ public class HammerMan : Player
         {
             skillTimerText.gameObject.SetActive(false);
         }
-        if (currentSkill == Skill.Stun)
-        {
-            stunTimer -= Time.deltaTime;
-            if (stunTimer <= 0)
-            {
-                animator.SetTrigger("EndStun");
-                currentSkill = Skill.Default;
-                stunTimer = maxStunTimer;
-                moveSpeed = maxMoveSpeed;
-                jumpForce = maxJumpForce;
-                rb.velocity = Vector3.zero;
-
-            }
-            else
-            {
-                moveSpeed = 0;
-                jumpForce = 0;
-            }
-        }
+        
         base.Update();
         if (Input.GetMouseButtonDown(0))
         {
@@ -101,7 +83,7 @@ public class HammerMan : Player
         if (target.CompareTag("Tagger"))
         {
             Debug.Log("HammerMan Attack2");
-            target.ApplySkill(Skill.Back);
+            target.photonView.RPC("RPCApplySkill", Photon.Pun.RpcTarget.All, Skill.Stun);
         }
     }
     [PunRPC]

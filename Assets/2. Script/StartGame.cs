@@ -32,7 +32,7 @@ public class StartGame : MonoBehaviourPunCallbacks
     [PunRPC]
     public void RPCEnteredPlayer()
     {
-        if (PhotonNetwork.CurrentRoom.PlayerCount == 2 && PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 3 && PhotonNetwork.IsMasterClient)
         {
             photonView.RPC("RPCCountDown", RpcTarget.All);
             PhotonNetwork.CurrentRoom.IsOpen = false;

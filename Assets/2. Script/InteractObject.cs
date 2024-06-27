@@ -36,7 +36,7 @@ public class InteractObject : MonoBehaviour
 
     }
 
-    IEnumerator CoUpdate()
+    public virtual IEnumerator CoUpdate()
     {
         WaitForSeconds wait = new WaitForSeconds(0.2f);
         while (true)

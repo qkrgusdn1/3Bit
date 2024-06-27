@@ -68,26 +68,6 @@ public class LightningMan : Player
         {
             skillTimerText.gameObject.SetActive(false);
         }
-        if (currentSkill == Skill.Stun)
-        {
-            stunTimer -= Time.deltaTime;
-            if (stunTimer <= 0)
-            {
-                animator.SetTrigger("EndStun");
-                currentSkill = Skill.Default;
-                stunTimer = maxStunTimer;
-                moveSpeed = maxMoveSpeed;
-                jumpForce = maxJumpForce;
-                
-                rb.velocity = Vector3.zero;
-                
-            }
-            else
-            {
-                moveSpeed = 0;
-                jumpForce = 0;
-            }
-        }
         base.Update();
 
     }

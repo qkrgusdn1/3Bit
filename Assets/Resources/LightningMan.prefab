@@ -447,7 +447,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2074563945907172489}
-  - {fileID: 7501002939536070934}
   - {fileID: 6231496795932179726}
   - {fileID: 3026528524323937782}
   m_Father: {fileID: 2406271426090165770}
@@ -5025,6 +5024,7 @@ RectTransform:
   - {fileID: 7512277274798824604}
   - {fileID: 3513195529512579184}
   - {fileID: 6457085652507177741}
+  - {fileID: 7501002939536070934}
   m_Father: {fileID: 2834662305053105557}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -8848,7 +8848,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2834662305053105557}
+  m_Father: {fileID: 2074563945907172489}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11867,11 +11867,13 @@ MonoBehaviour:
   hpBarCanvas: {fileID: 4727064970904640370}
   hpBar: {fileID: 3467590951801689318}
   hpBarMine: {fileID: 5472933709533291859}
+  hpBarBgMine: {fileID: 870776052593016693}
   currentSkill: 0
   stunTimer: 0
   maxStunTimer: 5
   back: 0
   canvas: {fileID: 304663961195725395}
+  allSkillTime: {fileID: 2198394972796851148}
   skillTimer: 0
   maxSkillTimer: 10
   skillTime: {fileID: 8619351765216144742}

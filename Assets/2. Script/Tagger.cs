@@ -68,31 +68,38 @@ public class Tagger : Player
                 photonView.RPC("RPCEndSkill", RpcTarget.All, currentSkill);
 
                 stunTimer = maxStunTimer;
-                moveSpeed = maxMoveSpeed;
-                jumpForce = maxJumpForce;
-                rb.velocity = Vector3.zero;
+                photonView.RPC("RPCSetMove", RpcTarget.All, maxMoveSpeed, maxJumpForce, Vector3.zero);
 
             }
             else
             {
-                moveSpeed = 0;
-                jumpForce = 0;
+                photonView.RPC("RPCSetMove", RpcTarget.All, 0f, 0f, Vector3.zero);
             }
         }
-        base.Update();
-        if (Input.GetMouseButtonDown(0))
+        if (currentSkill == Skill.Default)
         {
-            if (skillTimer >= maxSkillTimer)
+            base.Update();
+
+            if (Input.GetMouseButtonDown(0))
             {
-                photonView.RPC("RpcAttack", RpcTarget.All);
-                skillTimer = 0;
-                skillTime.fillAmount = skillTimer / maxSkillTimer;
-                skillTimerText.gameObject.SetActive(true);
+                if (skillTimer >= maxSkillTimer)
+                {
+                    photonView.RPC("RpcAttack", RpcTarget.All);
+                    skillTimer = 0;
+                    skillTime.fillAmount = skillTimer / maxSkillTimer;
+                    skillTimerText.gameObject.SetActive(true);
+                }
             }
         }
 
     }
-
+    [PunRPC]
+    public void RPCSetMove(float newMoveSpeed, float newJumpForce, Vector3 newVelocity)
+    {
+        moveSpeed = newMoveSpeed;
+        jumpForce = newJumpForce;
+        rb.velocity = newVelocity;
+    }
     public override void TakeDamage(float damage)
     {
         if (MissionMgr.Instance.missionCountBar.fillAmount >= 1)
