@@ -204,7 +204,7 @@ public class Player : MonoBehaviourPunCallbacks
 
     IEnumerator MoveBackCoroutine()
     {
-        transform.Translate(-transform.forward * moveSpeed * Time.deltaTime);
+        transform.Translate(-transform.forward * moveSpeed * 3 * Time.deltaTime);
         yield return new WaitForSeconds(2f);
         back = false;
         currentSkill = Skill.Default;

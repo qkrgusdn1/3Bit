@@ -83,7 +83,7 @@ public class HammerMan : Player
         if (target.CompareTag("Tagger"))
         {
             Debug.Log("HammerMan Attack2");
-            target.photonView.RPC("RPCApplySkill", Photon.Pun.RpcTarget.All, Skill.Stun);
+            target.photonView.RPC("RPCApplySkill", Photon.Pun.RpcTarget.All, Skill.Back);
         }
     }
     [PunRPC]
