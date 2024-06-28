@@ -216,7 +216,7 @@ public class Player : MonoBehaviourPunCallbacks
         currentSkill = skill;
         if (currentSkill == Skill.Default)
         {
-            
+            animator.SetTrigger("EndStun");
         }
         else if (currentSkill == Skill.Stun)
         {

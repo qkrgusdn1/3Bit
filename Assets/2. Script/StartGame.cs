@@ -94,7 +94,7 @@ public class StartGame : MonoBehaviourPunCallbacks
             yield return new WaitForSeconds(1);
             
         }
-        ClearMgr.Instance.win = false;
+        ClearMgr.Instance.win = true;
         if (PhotonNetwork.IsMasterClient)
             GameMgr.Instance.MoveClearScenes();
     }
