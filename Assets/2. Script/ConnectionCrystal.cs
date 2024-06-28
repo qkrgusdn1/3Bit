@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
@@ -20,9 +21,18 @@ public class ConnectionCrystal : InteractObject
         MissionMgr.Instance.MissionArray();
     }
 
-    public void TaggerRange()
+    public override void OnDrawGizmosSelected()
     {
-        taggerInRange = Physics.OverlapSphere(transform.position, range, runnerLayer);
+        base.OnDrawGizmosSelected();
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, taggerRange);
+    }
+
+
+    [PunRPC]
+    public void RPCTaggerRange()
+    {
+        taggerInRange = Physics.OverlapSphere(transform.position, taggerRange, taggerLayer);
 
         if (taggerInRange.Length <= 0)
         {
@@ -32,8 +42,6 @@ public class ConnectionCrystal : InteractObject
         {
             taggerCome = false;
         }
-
-
     }
 
     public override IEnumerator CoUpdate()
@@ -43,7 +51,7 @@ public class ConnectionCrystal : InteractObject
         {
             yield return wait;
             Range();
-            TaggerRange();
+            photonView.RPC("RPCTaggerRange", RpcTarget.All);
             CheckLookAt();
 
             if (enterd && watched)

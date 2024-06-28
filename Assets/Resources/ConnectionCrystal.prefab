@@ -235,9 +235,12 @@ MonoBehaviour:
   runnerLayer:
     serializedVersion: 2
     m_Bits: 8
+  taggerLayer:
+    serializedVersion: 2
+    m_Bits: 128
   crystalMission: 0
   taggerCome: 0
-  taggerRange: 0
+  taggerRange: 7
 --- !u!114 &4268398115799825699
 MonoBehaviour:
   m_ObjectHideFlags: 0

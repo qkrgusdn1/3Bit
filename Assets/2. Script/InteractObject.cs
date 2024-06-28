@@ -1,7 +1,8 @@
+using Photon.Pun;
 using System.Collections;
 using UnityEngine;
 
-public class InteractObject : MonoBehaviour
+public class InteractObject : MonoBehaviourPunCallbacks
 {
     public GameObject text;
     public float range;
@@ -11,6 +12,7 @@ public class InteractObject : MonoBehaviour
     public float angle;
 
     public LayerMask runnerLayer;
+    public LayerMask taggerLayer;
 
     Collider[] runnersInRange;
     public virtual void Start()
@@ -44,19 +46,22 @@ public class InteractObject : MonoBehaviour
             yield return wait;
             Range();
             CheckLookAt();
+            if (!GameMgr.Instance.player.gameObject.CompareTag("Tagger"))
+            {
+                if (enterd && watched)
+                {
+                    text.SetActive(true);
+                }
+                else
+                {
+                    text.SetActive(false);
+                }
+            }
 
-            if (enterd && watched)
-            {
-                text.SetActive(true);
-            }
-            else
-            {
-                text.SetActive(false);
-            }
         }
     }
 
-    public void OnDrawGizmosSelected()
+    public virtual void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, range);

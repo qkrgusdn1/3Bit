@@ -32,10 +32,11 @@ public class StartGame : MonoBehaviourPunCallbacks
     [PunRPC]
     public void RPCEnteredPlayer()
     {
-        if (PhotonNetwork.CurrentRoom.PlayerCount == 3 && PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 2 && PhotonNetwork.IsMasterClient)
         {
             photonView.RPC("RPCCountDown", RpcTarget.All);
             PhotonNetwork.CurrentRoom.IsOpen = false;
+            StartCoroutine(GameMgr.Instance.CoUpdate());
             Debug.Log("LogLog");
         }
     }
@@ -47,7 +48,7 @@ public class StartGame : MonoBehaviourPunCallbacks
 
 
     IEnumerator CountDown()
-    {
+    { 
         count = maxCount;
         while (true)
         {
