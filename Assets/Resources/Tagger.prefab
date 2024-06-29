@@ -2521,7 +2521,7 @@ MonoBehaviour:
   canvas: {fileID: 1367935628114220181}
   allSkillTime: {fileID: 1877676447130496282}
   skillTimer: 0
-  maxSkillTimer: 3
+  maxSkillTimer: 1
   skillTime: {fileID: 4682017466037875746}
   startPlayer: 0
   die: 0

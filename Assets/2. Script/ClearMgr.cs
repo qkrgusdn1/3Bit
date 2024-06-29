@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClearMgr : MonoBehaviour
+public class ClearMgr : MonoBehaviourPunCallbacks
 {
     private static ClearMgr instance;
     public static ClearMgr Instance
@@ -17,9 +17,14 @@ public class ClearMgr : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(gameObject);
     }
+    public override void OnLeftRoom()
+    {
+        Debug.Log("LeftRoom ¹æ¶°³²");
 
+        PhotonNetwork.LoadLevel("SampleScene");
+    }
     public void OnClickedLobbyBtn()
     {
-        PhotonNetwork.LoadLevel("SampleScene");
+        PhotonNetwork.LeaveRoom();
     }
 }

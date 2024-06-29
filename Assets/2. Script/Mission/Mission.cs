@@ -63,8 +63,11 @@ public class Mission : MonoBehaviour
         EndMission();
     }
 
-    private void Update()
+    public virtual void Update()
     {
+        if (connectionCrystal == null)
+            return;
+
         if (connectionCrystal.taggerCome == true)
         {
             taggerImage.gameObject.SetActive(true);

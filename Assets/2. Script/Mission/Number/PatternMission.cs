@@ -6,8 +6,9 @@ public class PatternMission : Mission
 {
     public int clickedCount;
     public List<GameObject> numberBtns = new List<GameObject>();
-    void Update()
+    public override void Update()
     {
+        base.Update();
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 worldPoint = missionCamera.ScreenToWorldPoint(Input.mousePosition);

@@ -21,9 +21,9 @@ public class LinkLineMinssion : Mission
     }
 
     
-    private void Update()
+    public override void Update()
     {
-        
+        base.Update();
 
         if (Input.GetMouseButtonDown(0))
         {

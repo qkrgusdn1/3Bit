@@ -10,9 +10,10 @@ public class BrickOutMission : Mission
     {
         brickBall = GetComponentInChildren<BrickBall>();
     }
-    private void Update()
+    public override void Update()
     {
-        if(brickBall.breakBrickCount == Bricks.Count)
+        base.Update();
+        if (brickBall.breakBrickCount == Bricks.Count)
         {
             CheckClear();
         }

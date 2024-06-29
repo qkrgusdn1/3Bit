@@ -28,13 +28,11 @@ public class ConnectionCrystal : InteractObject
         Gizmos.DrawWireSphere(transform.position, taggerRange);
     }
 
-
-    [PunRPC]
-    public void RPCTaggerRange()
+    public void TaggerRange()
     {
         taggerInRange = Physics.OverlapSphere(transform.position, taggerRange, taggerLayer);
 
-        if (taggerInRange.Length <= 0)
+        if (taggerInRange.Length > 0)
         {
             taggerCome = true;
         }
@@ -51,7 +49,7 @@ public class ConnectionCrystal : InteractObject
         {
             yield return wait;
             Range();
-            photonView.RPC("RPCTaggerRange", RpcTarget.All);
+            TaggerRange();
             CheckLookAt();
 
             if (enterd && watched)

@@ -7,42 +7,42 @@ public class SpeedUpRunner : MonoBehaviour
 {
     public float destroyTime;
     private int shooterID;
+    List<Player> playerRange = new List<Player>();
 
     public void SetShooterID(int id)
     {
         shooterID = id;
+        StartCoroutine(CoDestroy());
     }
 
     private void OnTriggerEnter(Collider other)
     {
         Player player = other.GetComponent<Player>();
+        playerRange.Add(player);
         if (player.CompareTag("Tagger"))
         {
             player.moveSpeed = 1;
         }
         else
         {
-            player.moveSpeed = 2 * player.moveSpeed;
+            player.moveSpeed = player.maxMoveSpeed;
         }
-
-        StartCoroutine(CoDestroy(player));
     }
 
     private void OnTriggerExit(Collider other)
     {
         Player player = other.GetComponent<Player>();
         player.moveSpeed = player.maxMoveSpeed;
+        playerRange.Remove(player);
     }
 
-    private IEnumerator CoDestroy(Player player)
+    private IEnumerator CoDestroy()
     {
         yield return new WaitForSeconds(destroyTime);
-        Destroy(player);
-    }
-
-    void Destroy(Player player)
-    {
-        player.moveSpeed = player.maxMoveSpeed;
+        for(int i = 0; i < playerRange.Count; i++)
+        {
+            playerRange[i].moveSpeed = playerRange[i].maxMoveSpeed;
+        }
         Destroy(gameObject);
     }
 }

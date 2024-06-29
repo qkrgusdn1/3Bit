@@ -64,6 +64,7 @@ public class Player : MonoBehaviourPunCallbacks
         {
             canvas.SetActive(false);
             hpBarCanvas.SetActive(true);
+            rb.isKinematic = true;
         }
         else
         {
@@ -74,6 +75,7 @@ public class Player : MonoBehaviourPunCallbacks
                 photonView.RPC("RPCAddPlayerList", RpcTarget.All);
                 GameMgr.Instance.AddPlayer();
             }
+            rb.isKinematic = false;
 
         }
         animator = GetComponentInChildren<Animator>();
@@ -204,8 +206,15 @@ public class Player : MonoBehaviourPunCallbacks
 
     IEnumerator MoveBackCoroutine()
     {
-        transform.Translate(-transform.forward * moveSpeed * 3 * Time.deltaTime);
-        yield return new WaitForSeconds(2f);
+        float timer = 1;
+        while (true)
+        {
+            if (timer < 0)
+                break;
+            yield return null;
+            rb.velocity = -bodyTr.forward * maxMoveSpeed * 3;
+            timer -= Time.deltaTime;
+        }
         back = false;
         currentSkill = Skill.Default;
     }
