@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using TMPro;
 using UnityEditor.Rendering;
@@ -154,7 +155,6 @@ public class Player : MonoBehaviourPunCallbacks
             Move();
         }
     }
-
     public void Die()
     {
         if (hp <= 0)
