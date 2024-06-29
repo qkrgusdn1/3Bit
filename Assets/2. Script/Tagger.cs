@@ -81,6 +81,8 @@ public class Tagger : Player
             base.Update();
             if (esc)
                 return;
+            if (mission)
+                return;
             if (Input.GetMouseButtonDown(0))
             {
                 if (skillTimer >= maxSkillTimer)

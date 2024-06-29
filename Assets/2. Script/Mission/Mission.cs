@@ -22,6 +22,7 @@ public class Mission : MonoBehaviour
 
     public virtual void StartMission()
     {
+        GameMgr.Instance.player.mission = true;
         SetAlpha(GameMgr.Instance.player.hpBarMine, 0);
         SetAlpha(GameMgr.Instance.player.hpBarBgMine, 0);
         Cursor.lockState = CursorLockMode.None;
@@ -35,6 +36,7 @@ public class Mission : MonoBehaviour
     }
     public virtual void EndMission()
     {
+        GameMgr.Instance.player.mission = false;
         SetAlpha(GameMgr.Instance.player.hpBarMine, 1);
         SetAlpha(GameMgr.Instance.player.hpBarBgMine, 1);
         Cursor.lockState = CursorLockMode.Locked;
@@ -70,6 +72,7 @@ public class Mission : MonoBehaviour
 
         if (connectionCrystal.taggerCome == true)
         {
+            
             taggerImage.gameObject.SetActive(true);
         }
         else

@@ -68,6 +68,8 @@ public class HammerMan : Player
         {
             if (esc)
                 return;
+            if (mission)
+                return;
             if (skillTimer >= maxSkillTimer)
             {
                 photonView.RPC("RpcAttack", RpcTarget.All);

@@ -23,31 +23,31 @@ public class StartGame : MonoBehaviourPunCallbacks
 
     public ConnectionCrystalPosition connectionCrystalPosition;
     public List<Player> players = new List<Player>();
-    //private void Start()
-    //{
-    //    photonView.RPC("RPCEnteredPlayer", RpcTarget.All);
-    //    music = SoundMgr.Instance.inGameMusic;
-    //}
-
-
-    //[PunRPC]
-    //public void RPCEnteredPlayer()
-    //{
-    //    if (PhotonNetwork.CurrentRoom.PlayerCount == 2 && PhotonNetwork.IsMasterClient)
-    //    {
-    //        photonView.RPC("RPCCountDown", RpcTarget.All);
-    //        PhotonNetwork.CurrentRoom.IsOpen = false;
-    //        StartCoroutine(GameMgr.Instance.CoUpdate());
-    //        Debug.Log("LogLog");
-    //    }
-    //}
-
     private void Start()
     {
-
-        photonView.RPC("RPCCountDown", RpcTarget.All);
+        photonView.RPC("RPCEnteredPlayer", RpcTarget.All);
         music = SoundMgr.Instance.inGameMusic;
     }
+
+
+    [PunRPC]
+    public void RPCEnteredPlayer()
+    {
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 2 && PhotonNetwork.IsMasterClient)
+        {
+            photonView.RPC("RPCCountDown", RpcTarget.All);
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+            StartCoroutine(GameMgr.Instance.CoUpdate());
+            Debug.Log("LogLog");
+        }
+    }
+
+    //private void Start()
+    //{
+
+    //    photonView.RPC("RPCCountDown", RpcTarget.All);
+    //    music = SoundMgr.Instance.inGameMusic;
+    //}
 
 
     IEnumerator CountDown()
@@ -68,7 +68,6 @@ public class StartGame : MonoBehaviourPunCallbacks
                 gameTimerText.gameObject.SetActive(true);
                 if (PhotonNetwork.IsMasterClient)
                 {
-                    RomovePlayer();
                     RandomPowers();
                     CountingPlayerPowers();
                     connectionCrystalPosition.StartGame();
@@ -136,11 +135,5 @@ public class StartGame : MonoBehaviourPunCallbacks
                 players[i].SetPower(powers[i]);
             }
         }
-    }
-    [PunRPC]
-    public void RomovePlayer()
-    {
-        if(PhotonNetwork.IsMasterClient)
-            GameMgr.Instance.players.Clear();
     }
 }

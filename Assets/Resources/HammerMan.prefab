@@ -6927,9 +6927,10 @@ MonoBehaviour:
   rb: {fileID: 450110592912097094}
   moveSpeed: 0
   maxMoveSpeed: 8
-  maxJumpForce: 14
+  maxJumpForce: 14.7
   isGrounded: 0
   esc: 0
+  mission: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -10006,7 +10007,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a9f3e520e284a094c939b7d6dddb39dd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e215860da5560b44795ffa0d7822bddf, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -18998,7 +18999,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a9f3e520e284a094c939b7d6dddb39dd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e215860da5560b44795ffa0d7822bddf, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1

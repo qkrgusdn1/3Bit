@@ -2506,6 +2506,7 @@ MonoBehaviour:
   maxJumpForce: 25
   isGrounded: 0
   esc: 0
+  mission: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 64

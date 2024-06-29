@@ -27,6 +27,7 @@ public class Player : MonoBehaviourPunCallbacks
     public bool isGrounded;
 
     public bool esc;
+    public bool mission;
 
     public LayerMask groundLayer;
 
@@ -139,12 +140,13 @@ public class Player : MonoBehaviourPunCallbacks
         if (esc)
             return;
 
+        if (mission)
+            return;
+
 
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (esc)
-                return;
             Shoot();
         }
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isJumping)
@@ -267,7 +269,7 @@ public class Player : MonoBehaviourPunCallbacks
     {
         if (photonView.IsMine == false)
             return;
-
+        GameMgr.Instance.players.Remove(this);
         if (power == "LightningMan")
         {
             
