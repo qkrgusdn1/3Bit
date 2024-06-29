@@ -204,7 +204,7 @@ public class Player : MonoBehaviourPunCallbacks
 
     IEnumerator MoveBackCoroutine()
     {
-        transform.Translate(-transform.forward * moveSpeed * Time.deltaTime);
+        transform.Translate(-transform.forward * moveSpeed * 3 * Time.deltaTime);
         yield return new WaitForSeconds(2f);
         back = false;
         currentSkill = Skill.Default;
@@ -216,7 +216,7 @@ public class Player : MonoBehaviourPunCallbacks
         currentSkill = skill;
         if (currentSkill == Skill.Default)
         {
-            
+            animator.SetTrigger("EndStun");
         }
         else if (currentSkill == Skill.Stun)
         {

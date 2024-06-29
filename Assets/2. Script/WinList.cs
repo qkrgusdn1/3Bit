@@ -9,7 +9,8 @@ public class WinList : MonoBehaviour
     public GameObject taggerWin;
     private void Start()
     {
-
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         if (ClearMgr.Instance.win == false)
         {
             runnerWin.SetActive(false);

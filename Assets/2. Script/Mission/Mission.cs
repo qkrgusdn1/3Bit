@@ -65,7 +65,7 @@ public class Mission : MonoBehaviour
 
     private void Update()
     {
-        if(connectionCrystal.taggerCome == true)
+        if (connectionCrystal.taggerCome == true)
         {
             taggerImage.gameObject.SetActive(true);
         }

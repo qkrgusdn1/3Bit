@@ -73,6 +73,23 @@ public class GameMgr : MonoBehaviourPunCallbacks
         PhotonNetwork.LeaveRoom();
     }
 
+    public IEnumerator CoUpdate()
+    {
+       
+        while (true)
+        {
+            yield return new WaitForSeconds(1);
+            for(int i = 0; i < players.Count; i++)
+            {
+                if (players[i] == null)
+                {
+                    players.RemoveAt(i);
+                }
+            }
+        }
+
+    }
+
 
 
 }
