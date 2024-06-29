@@ -60,6 +60,12 @@ public class PhotonMgr : MonoBehaviourPunCallbacks
     {
         base.OnJoinedRoom();
         Debug.Log("룸에 참가했습니다: " + PhotonNetwork.CurrentRoom.Name);
+        SoundMgr.Instance.lobbyMusic.gameObject.SetActive(false);
+        SoundMgr.Instance.inGameMusic.gameObject.SetActive(true);
+        for (int i = 0; i < SoundMgr.Instance.attackSounds.Count; i++)
+        {
+            SoundMgr.Instance.attackSounds[i].gameObject.SetActive(true);
+        }
         PhotonNetwork.LoadLevel("InGame");
 
     }

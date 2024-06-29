@@ -79,7 +79,8 @@ public class Tagger : Player
         if (currentSkill == Skill.Default)
         {
             base.Update();
-
+            if (esc)
+                return;
             if (Input.GetMouseButtonDown(0))
             {
                 if (skillTimer >= maxSkillTimer)

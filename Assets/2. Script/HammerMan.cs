@@ -66,6 +66,8 @@ public class HammerMan : Player
         base.Update();
         if (Input.GetMouseButtonDown(0))
         {
+            if (esc)
+                return;
             if (skillTimer >= maxSkillTimer)
             {
                 photonView.RPC("RpcAttack", RpcTarget.All);

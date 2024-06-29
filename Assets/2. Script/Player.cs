@@ -26,6 +26,8 @@ public class Player : MonoBehaviourPunCallbacks
     protected bool isJumping;
     public bool isGrounded;
 
+    public bool esc;
+
     public LayerMask groundLayer;
 
     protected Animator animator;
@@ -69,11 +71,11 @@ public class Player : MonoBehaviourPunCallbacks
         else
         {
             hpBarCanvas.SetActive(false);
+            photonView.RPC("RPCAddPlayerList", RpcTarget.All);
+            GameMgr.Instance.AddPlayer();
             if (!startPlayer)
             {
                 canvas.SetActive(true);
-                photonView.RPC("RPCAddPlayerList", RpcTarget.All);
-                GameMgr.Instance.AddPlayer();
             }
             rb.isKinematic = false;
 
@@ -134,12 +136,15 @@ public class Player : MonoBehaviourPunCallbacks
         {
             isGrounded = false;
         }
-
+        if (esc)
+            return;
 
 
 
         if (Input.GetKeyDown(KeyCode.E))
         {
+            if (esc)
+                return;
             Shoot();
         }
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isJumping)
@@ -151,11 +156,7 @@ public class Player : MonoBehaviourPunCallbacks
 
 
         Rotation();
-
-        if (currentSkill == Skill.Default)
-        {
-            Move();
-        }
+        Move();
     }
     public void Die()
     {
@@ -267,8 +268,9 @@ public class Player : MonoBehaviourPunCallbacks
         if (photonView.IsMine == false)
             return;
 
-        if(power == "LightningMan")
+        if (power == "LightningMan")
         {
+            
             GameObject lightningMan = PhotonNetwork.Instantiate(power, transform.position, transform.rotation);
         }
         else if(power == "Tagger")

@@ -18,6 +18,7 @@ public class RoomJoinButton : MonoBehaviour
 
     public void OnClickedJoinButton()
     {
+        PhotonMgr.Instance.roomLodingPanel.SetActive(true);
         PhotonMgr.Instance.JoinRoom(roomInfo);
     }
 }
