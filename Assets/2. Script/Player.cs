@@ -77,6 +77,7 @@ public class Player : MonoBehaviourPunCallbacks
             if (!startPlayer)
             {
                 canvas.SetActive(true);
+                StartCoroutine(ExecutePlayerCountAction());
             }
             rb.isKinematic = false;
 
@@ -86,6 +87,9 @@ public class Player : MonoBehaviourPunCallbacks
         {
             CameraMgr.Instance.SetTarget(this);
         }
+
+
+
         skillTimer = maxSkillTimer;
         skillTime.fillAmount = 1;
         
@@ -128,6 +132,8 @@ public class Player : MonoBehaviourPunCallbacks
 
         }
 
+        
+
         if (Physics.Raycast(bodyTr.position, Vector3.down, 0.1f, groundLayer))
         {
             isGrounded = true;
@@ -137,6 +143,7 @@ public class Player : MonoBehaviourPunCallbacks
         {
             isGrounded = false;
         }
+        
         if (esc)
             return;
 
@@ -160,6 +167,7 @@ public class Player : MonoBehaviourPunCallbacks
         Rotation();
         Move();
     }
+
     public void Die()
     {
         if (hp <= 0)
@@ -169,18 +177,33 @@ public class Player : MonoBehaviourPunCallbacks
             GameMgr.Instance.diePanel.SetActive(true);
             GameMgr.Instance.players.Remove(this);
 
+            
+            if (gameObject.CompareTag("Tagger"))
+            {
+                ClearMgr.Instance.win = true;
+                GameMgr.Instance.MoveClearScenes();
+            }
+            photonView.RPC("RpcDIe", RpcTarget.All);
+        }
+    }
+
+    public IEnumerator ExecutePlayerCountAction()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1);
             if (GameMgr.Instance.players.Count == 1)
             {
                 if (GameMgr.Instance.players[0].gameObject.CompareTag("Runner"))
                 {
                     ClearMgr.Instance.win = true;
+                    GameMgr.Instance.MoveClearScenes();
                 }
-                else if(GameMgr.Instance.players[0].gameObject.CompareTag("Tagger"))
+                else if (GameMgr.Instance.players[0].gameObject.CompareTag("Tagger"))
                 {
                     ClearMgr.Instance.win = false;
+                    GameMgr.Instance.MoveClearScenes();
                 }
-                GameMgr.Instance.MoveClearScenes();
-                return;
             }
             else if (GameMgr.Instance.players.Count == 3)
             {
@@ -198,16 +221,9 @@ public class Player : MonoBehaviourPunCallbacks
                     }
                 }
             }
-            else if (gameObject.CompareTag("Tagger"))
-            {
-                ClearMgr.Instance.win = true;
-                GameMgr.Instance.MoveClearScenes();
-            }
-            photonView.RPC("RpcDIe", RpcTarget.All);
         }
+        
     }
-    
-
 
     public virtual void Attack(Player target, float damage)
     {
@@ -282,12 +298,12 @@ public class Player : MonoBehaviourPunCallbacks
     [PunRPC]
     public void RPCSetPower(string power)
     {
+        GameMgr.Instance.players.Remove(this);
         if (photonView.IsMine == false)
             return;
-        GameMgr.Instance.players.Remove(this);
+        
         if (power == "LightningMan")
         {
-            
             GameObject lightningMan = PhotonNetwork.Instantiate(power, transform.position, transform.rotation);
         }
         else if(power == "Tagger")

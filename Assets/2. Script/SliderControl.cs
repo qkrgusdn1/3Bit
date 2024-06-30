@@ -7,6 +7,8 @@ public class SliderControl : MonoBehaviour
     public Slider musicSlider;
     public Slider attackSoundSlider;
     public Slider sensitivitySlider;
+    public Slider horSensitivitySlider;
+    public Slider vertSensitivitySlider;
     float sensitivity;
     private void Start()
     {
@@ -16,8 +18,8 @@ public class SliderControl : MonoBehaviour
         {
             attackSoundSlider.value = SoundMgr.Instance.attackSounds[i].volume;
         }
-
-        sensitivitySlider.value = PlayerPrefs.GetFloat("Sensitivity", 1.0f);
+        horSensitivitySlider.value = PlayerPrefs.GetFloat("HorSensitivity", 3);
+        vertSensitivitySlider.value = PlayerPrefs.GetFloat("VertSensitivity", 3);
     }
 
     public void MusicVolumeSlider(float volume)
@@ -42,5 +44,21 @@ public class SliderControl : MonoBehaviour
     {
         sensitivity = sensitivityValue;
         PlayerPrefs.SetFloat("Sensitivity", sensitivity);
+    }
+
+    public void SetHorizontalSensitivity(float value)
+    {
+        PlayerPrefs.SetFloat("HorSensitivity", value);
+        horSensitivitySlider.value = value;
+        if (GameMgr.Instance != null)
+                GameMgr.Instance.player.vertSensitivity = value;
+    }
+
+    public void SetVerticalSensitivity(float value)
+    {
+        PlayerPrefs.SetFloat("VertSensitivity", value);
+        vertSensitivitySlider.value = value;
+        if (GameMgr.Instance != null)
+            GameMgr.Instance.player.vertSensitivity = value;
     }
 }

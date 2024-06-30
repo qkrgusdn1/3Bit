@@ -15,8 +15,6 @@ public class StartGame : MonoBehaviourPunCallbacks
     float count;
     public float maxCount;
 
-    public GameObject Barrier;
-
     public AudioSource music;
 
     public List<string> powers = new List<string>();
@@ -37,7 +35,7 @@ public class StartGame : MonoBehaviourPunCallbacks
         {
             photonView.RPC("RPCCountDown", RpcTarget.All);
             PhotonNetwork.CurrentRoom.IsOpen = false;
-            StartCoroutine(GameMgr.Instance.CoUpdate());
+
             Debug.Log("LogLog");
         }
     }
@@ -93,7 +91,8 @@ public class StartGame : MonoBehaviourPunCallbacks
                 minutes--;
                 seconds = 59;
             }
-            gameTimerText.text = minutes.ToString() + ":" + seconds.ToString();
+            string secondsString = seconds.ToString("D2");
+            gameTimerText.text = minutes.ToString() + ":" + secondsString;
             yield return new WaitForSeconds(1);
             
         }

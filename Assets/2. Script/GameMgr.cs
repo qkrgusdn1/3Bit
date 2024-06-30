@@ -28,7 +28,7 @@ public class GameMgr : MonoBehaviourPunCallbacks
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         PhotonNetwork.Instantiate("Player", new Vector3(0, 0, 0), Quaternion.identity);
-        
+        StartCoroutine(CoUpdate());
     }
     public void MoveClearScenes()
     {
@@ -82,17 +82,17 @@ public class GameMgr : MonoBehaviourPunCallbacks
 
     public IEnumerator CoUpdate()
     {
-       
+
         while (true)
         {
-            yield return new WaitForSeconds(1);
-            for(int i = 0; i < players.Count; i++)
+            for (int i = players.Count - 1; i >= 0; i--)
             {
                 if (players[i] == null)
                 {
                     players.RemoveAt(i);
                 }
             }
+            yield return new WaitForSeconds(1);
         }
 
     }
