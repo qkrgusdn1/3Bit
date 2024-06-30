@@ -13,6 +13,8 @@ public class MissionMgr : MonoBehaviourPunCallbacks
 
     public TMP_Text missionClearText;
 
+    public GameObject taggerImage;
+
     public List<ConnectionCrystal> connectionCrystals = new List<ConnectionCrystal>();
 
     public List<CrystalMission> crystalMissions = new List<CrystalMission>();

@@ -182,8 +182,23 @@ public class Player : MonoBehaviourPunCallbacks
                 GameMgr.Instance.MoveClearScenes();
                 return;
             }
-
-            if (gameObject.CompareTag("Tagger"))
+            else if (GameMgr.Instance.players.Count == 3)
+            {
+                MissionMgr.Instance.missionCountBar.gameObject.SetActive(false);
+                MissionMgr.Instance.taggerImage.gameObject.SetActive(true);
+                for (int i = 0; i < GameMgr.Instance.players.Count; i++)
+                {
+                    if (GameMgr.Instance.players[i].CompareTag("Tagger"))
+                    {
+                        GameMgr.Instance.players[i].maxMoveSpeed = GameMgr.Instance.players[i].maxMoveSpeed + 5;
+                    }
+                    else if (GameMgr.Instance.players[i].CompareTag("Runner"))
+                    {
+                        GameMgr.Instance.players[i].maxMoveSpeed = GameMgr.Instance.players[i].maxMoveSpeed - 3;
+                    }
+                }
+            }
+            else if (gameObject.CompareTag("Tagger"))
             {
                 ClearMgr.Instance.win = true;
                 GameMgr.Instance.MoveClearScenes();

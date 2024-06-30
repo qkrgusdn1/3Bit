@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class SliderControl : MonoBehaviour
 {
-    public bool attackSound;
     public Slider musicSlider;
     public Slider attackSoundSlider;
     public Slider sensitivitySlider;
