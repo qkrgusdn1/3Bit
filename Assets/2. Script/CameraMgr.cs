@@ -5,14 +5,18 @@ using UnityEngine;
 
 public class CameraMgr : MonoBehaviourPunCallbacks
 {
-    public static CameraMgr Instance;
     Player playerTargetTr;
 
     public Transform xRotationTr1;
     public Transform xRotationTr3;
-    public void Awake()
+    private static CameraMgr instance;
+    public static CameraMgr Instance
     {
-        Instance = this;
+        get { return instance; }
+    }
+    void Awake()
+    {
+        instance = this;
     }
 
     public void SetTarget(Player player)

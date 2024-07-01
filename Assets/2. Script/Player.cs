@@ -59,6 +59,8 @@ public class Player : MonoBehaviourPunCallbacks
 
     public bool die;
 
+    bool threePlayer;
+
     public TMP_Text skillTimerText;
     bool isMoving;
     public virtual void Start()
@@ -180,8 +182,9 @@ public class Player : MonoBehaviourPunCallbacks
             
             if (gameObject.CompareTag("Tagger"))
             {
-                ClearMgr.Instance.win = true;
+                photonView.RPC("RpcDIe", RpcTarget.All);
                 GameMgr.Instance.MoveClearScenes();
+
             }
             photonView.RPC("RpcDIe", RpcTarget.All);
         }
@@ -205,24 +208,25 @@ public class Player : MonoBehaviourPunCallbacks
                     GameMgr.Instance.MoveClearScenes();
                 }
             }
-            else if (GameMgr.Instance.players.Count == 3)
+            else if (GameMgr.Instance.players.Count == 3 && !threePlayer)
             {
                 MissionMgr.Instance.missionCountBar.gameObject.SetActive(false);
                 MissionMgr.Instance.taggerImage.gameObject.SetActive(true);
-                for (int i = 0; i < GameMgr.Instance.players.Count; i++)
+                if (GameMgr.Instance.player.gameObject.CompareTag("Tagger"))
                 {
-                    if (GameMgr.Instance.players[i].CompareTag("Tagger"))
-                    {
-                        GameMgr.Instance.players[i].maxMoveSpeed = GameMgr.Instance.players[i].maxMoveSpeed + 5;
-                    }
-                    else if (GameMgr.Instance.players[i].CompareTag("Runner"))
-                    {
-                        GameMgr.Instance.players[i].maxMoveSpeed = GameMgr.Instance.players[i].maxMoveSpeed - 3;
-                    }
+                    GameMgr.Instance.player.maxMoveSpeed = GameMgr.Instance.player.maxMoveSpeed + 5;
+                    GameMgr.Instance.player.moveSpeed = GameMgr.Instance.player.maxMoveSpeed;
+                    
                 }
+                else if (GameMgr.Instance.player.gameObject.CompareTag("Runner"))
+                {
+                    GameMgr.Instance.player.maxMoveSpeed = GameMgr.Instance.player.maxMoveSpeed - 3;
+                    GameMgr.Instance.player.moveSpeed = GameMgr.Instance.player.maxMoveSpeed;
+                    
+                }
+                threePlayer = true;
             }
         }
-        
     }
 
     public virtual void Attack(Player target, float damage)
@@ -282,8 +286,8 @@ public class Player : MonoBehaviourPunCallbacks
 
     public void Rotation()
     {
-        rotationY += Input.GetAxis("Mouse X") * horSensitivity;
-        rotationX -= Input.GetAxis("Mouse Y") * vertSensitivity;
+        rotationY += Input.GetAxis("Mouse X") * horSensitivity * SliderControl.sensitivityValue;
+        rotationX -= Input.GetAxis("Mouse Y") * vertSensitivity * SliderControl.sensitivityValue;
 
         rotationX = Mathf.Clamp(rotationX, -90f, 90f);
 
@@ -360,6 +364,12 @@ public class Player : MonoBehaviourPunCallbacks
     [PunRPC]
     public void RpcDIe()
     {
+        if (gameObject.CompareTag("Tagger"))
+        {
+            ClearMgr.Instance.win = true;
+            return;
+        }
+        
         Destroy(gameObject);
     }
 

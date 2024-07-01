@@ -20,11 +20,12 @@ public class ClearMgr : MonoBehaviourPunCallbacks
     public override void OnLeftRoom()
     {
         Debug.Log("LeftRoom ¹æ¶°³²");
-
         PhotonNetwork.LoadLevel("SampleScene");
+
     }
     public void OnClickedLobbyBtn()
     {
         PhotonNetwork.LeaveRoom();
+
     }
 }

@@ -25,6 +25,7 @@ public class GameMgr : MonoBehaviourPunCallbacks
     public GameObject lobbyLodingPanel;
     void Start()
     {
+        SliderControl.sensitivityValue = PlayerPrefs.GetFloat("Sensitivity", 1);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         PhotonNetwork.Instantiate("Player", new Vector3(0, 0, 0), Quaternion.identity);
@@ -66,6 +67,7 @@ public class GameMgr : MonoBehaviourPunCallbacks
         Debug.Log("LeftRoom ¹æ¶°³²");
         lobbyLodingPanel.SetActive(true);
         PhotonNetwork.LoadLevel("SampleScene");
+        
     }
 
     public void OnClickedLobbyBtn()
